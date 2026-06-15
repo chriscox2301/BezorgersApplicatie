@@ -3,12 +3,30 @@
     x:Class="BezorgApplicatie.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:BezorgApplicatie"
+    xmlns:views="clr-namespace:BezorgApplicatie.Views"
     Title="BezorgApplicatie">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Icon="agenda.png"
+            Title="Planning"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Route="MainPage" />
+        <ShellContent
+            Icon="orders.png"
+            Title="Orders"
+            ContentTemplate="{DataTemplate views:NewPage1}"
+            Route="NewPage1" />
+        <ShellContent
+            Icon="map.png"
+            Title="Kaart"
+            ContentTemplate="{DataTemplate views:NewPage1}"
+            Route="NewPage1" /> 
+        <ShellContent
+            Icon="hammer.png"
+            Title="Dienst"
+            ContentTemplate="{DataTemplate views:NewPage1}"
+            Route="NewPage1" />
+    </TabBar>
 
 </Shell>

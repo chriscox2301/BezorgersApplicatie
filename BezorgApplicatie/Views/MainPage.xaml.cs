@@ -1,4 +1,4 @@
-﻿namespace BezorgApplicatie
+﻿namespace BezorgApplicatie.Views
 {
     public partial class MainPage : ContentPage
     {
