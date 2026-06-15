@@ -9,22 +9,23 @@
     <TabBar>
         <ShellContent
             Icon="agenda.png"
-            Title="Planning"
+            Title="Dienst"
             ContentTemplate="{DataTemplate views:MainPage}"
             Route="MainPage" />
+        <ShellContent
+            Icon="map.png"
+            Title="Kaart"
+            ContentTemplate="{DataTemplate views:NewPage1}"
+            Route="NewPage1" />
         <ShellContent
             Icon="orders.png"
             Title="Orders"
             ContentTemplate="{DataTemplate views:NewPage1}"
             Route="NewPage1" />
-        <ShellContent
-            Icon="map.png"
-            Title="Kaart"
-            ContentTemplate="{DataTemplate views:NewPage1}"
-            Route="NewPage1" /> 
+
         <ShellContent
             Icon="hammer.png"
-            Title="Dienst"
+            Title="Schade"
             ContentTemplate="{DataTemplate views:NewPage1}"
             Route="NewPage1" />
     </TabBar>
