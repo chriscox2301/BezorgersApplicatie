@@ -1,0 +1,99 @@
+@startuml KlassenDiagramBezorgerApp
+class Order{
+    +Id: int
+    +Date: DateTime
+    +IEnumerable<Package> Packages
+    +Status: string
+    +Address: string
+}
+
+class Package{
+    +Id: int
+    +Weight: double
+    +Barcode: string
+    +Cart: Cart
+    +CartId: int
+    +Order: Order
+    +OrderId: int
+}
+
+class VehicleDamage{
+    +Id: int
+    +Description: string
+    +Location: string
+    +Shift: Shift
+    +ShiftId: int
+    +Vehicle: Vehicle
+    +VehicleId: int
+}
+
+class Shift{
+    +Id: int
+    +StartTime: DateTime
+    +EndTime: DateTime
+    +Driver: Driver
+    +DriverId: int
+    +Vehicle: Vehicle
+    +VehicleId: int
+    +IEnumerable<Order> Orders
+    +Warehouse: Warehouse
+    +WarehouseId: int
+    +Load: Load
+    +LoadId: int
+}
+
+class PackageIssue{
+    +Id: int
+    +Description: string
+    +Date: DateTime
+    +Package: Package
+    +PackageId: int
+}
+
+class Vehicle{
+    +Id: int
+    +LicensePlate: string
+    +IEnumerable<VehicleDamage> VehicleDamage
+}
+
+class Warehouse{
+    +Id: int
+    +Location: string
+    +IEnumerable<Load> Loads
+}
+
+class Load{
+    +Id: int
+    +Warehouse: Warehouse
+    +WarehouseId: int
+    +Shift: Shift
+    +ShiftId: int
+    +IEnumerable<Cart> Carts
+}
+
+class Cart{
+    +Id: int
+    +Warehouse: Warehouse
+    +WarehouseId: int
+    +VehicleZone: string
+    +IEnumerable<Package> Packages
+}
+
+class Driver{
+    +Id: int
+    +Name: string
+    +IEnumerable<Shift> Shifts
+}
+
+Order "1" --- "1..*" Package
+Shift "1" -- "1..*" Order
+Shift "1" -- "1" Load
+Load "1..*" -- "1..*" Cart
+Cart "1" -- "1..*" Package
+Warehouse "1"-- "1..*" Shift
+Vehicle "1..*" -- "0..*" Shift
+Driver "1..*" -- "0..*" Shift
+Package "1" -- "0..1" PackageIssue
+Vehicle "1" -- "0..*" VehicleDamage
+
+@enduml
