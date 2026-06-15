@@ -11,7 +11,10 @@ namespace BezorgApplicatie.Data
     {
         public static void Initialize(DataContext context)
         {
-         
+            //Zorgt ervoor dat initializer NIET gedaan wordt wanneer er al data in zit.
+            if (context.Drivers.Any())
+                return;
+
             var drivers = new Driver[]
             {
                 new Driver {Name = "Piet"},
