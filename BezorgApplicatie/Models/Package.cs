@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace BezorgApplicatie.Models
 {
-    internal class Package
+    public class Package
     {
+        public int Id { get; set; }
+        public double Weight { get; set; }
+        public string Barcode { get; set; }
+        public int OrderId { get; set; }
+        public int CartId { get; set; }
     }
 }

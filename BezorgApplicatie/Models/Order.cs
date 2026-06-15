@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace BezorgApplicatie.Models
 {
-    internal class Order
+    public class Order
     {
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
+        public IEnumerable<Package> Packages { get; set; }
+        public string Status { get; set; }
+        public string Address { get; set; }
+
     }
 }

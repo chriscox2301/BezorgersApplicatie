@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BezorgApplicatie.Models
 {
-    internal class Driver
+    public class Driver
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public IEnumerable<Shift> Shifts { get; set; }
     }
 }

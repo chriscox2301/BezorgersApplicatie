@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace BezorgApplicatie.Models
 {
-    internal class Load
+    public class Load
     {
+        public int Id { get; set; }
+        public int WarehouseId { get; set; }
+        public int ShiftId { get; set; }
+        public IEnumerable<Cart> Carts { get; set; }
     }
 }
