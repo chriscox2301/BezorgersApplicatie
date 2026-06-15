@@ -14,7 +14,8 @@ namespace BezorgApplicatie.Models
         public Vehicle Vehicle { get; set; }
         public int ShiftId { get; set; }
         public Shift Shift { get; set; }
-        public string Location { get; set; } 
+        public string Location { get; set; }
+        public DateTime Time { get; set; }
 
     }
 }
