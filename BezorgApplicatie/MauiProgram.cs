@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BezorgApplicatie.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using static Java.Util.Jar.Pack200;
 
 namespace BezorgApplicatie
 {
@@ -15,11 +18,20 @@ namespace BezorgApplicatie
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+            builder.Services.AddDbContext<DataContext>(
+                options =>
+                {
+                    var dbPath = Path.Combine(FileSystem.AppDataDirectory, "MatrixIncBezorger.db");
+                    options.UseSqlite($"Data Source={dbPath}");
+                }
+                );
 
-            return builder.Build();
+#if DEBUG
+            builder.Logging.AddDebug();
+#endif
+            var app = builder.Build();
+
+            return app;
         }
     }
 }
