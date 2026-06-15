@@ -33,8 +33,12 @@ namespace BezorgApplicatie
 
             using (var scope = app.Services.CreateScope())
             {
+               
                 var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+
                 context.Database.EnsureCreated();
+
+                DataContextInitializer.Initialize(context);
             }
 
             return app;
