@@ -1,7 +1,7 @@
 ﻿using BezorgApplicatie.Data;
+using BezorgApplicatie.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using static Java.Util.Jar.Pack200;
 
 namespace BezorgApplicatie
 {
@@ -30,6 +30,12 @@ namespace BezorgApplicatie
             builder.Logging.AddDebug();
 #endif
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+                context.Database.EnsureCreated();
+            }
 
             return app;
         }

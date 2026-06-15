@@ -9,7 +9,7 @@ namespace BezorgApplicatie.Models
     public class Cart
     {
         public int Id { get; set; }
-        public int WarehouseId { get; set; }
+        public Warehouse Warehouse { get; set; }
         public string VehicleZone { get; set; }
         public IEnumerable<Package> Packages { get; set; }
     }

@@ -10,6 +10,7 @@ namespace BezorgApplicatie.Models
     {
         public int Id { get; set; }
         public string LicensePlate { get; set; }
+        public IEnumerable<VehicleDamage> VehicleDamages { get; set; }
 
     }
 }
