@@ -1,5 +1,4 @@
-﻿using Android.App.AppSearch;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +12,6 @@ namespace BezorgApplicatie.Models
         public string description { get; set; }
         public DateTime Date { get; set; }
         public int PackageId { get; set; }
+        public Package Package { get; set; }
     }
 }

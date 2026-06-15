@@ -12,6 +12,8 @@ namespace BezorgApplicatie.Models
         public double Weight { get; set; }
         public string Barcode { get; set; }
         public int OrderId { get; set; }
+        public Order Order { get; set; }
         public int CartId { get; set; }
+        public Cart Cart { get; set; }
     }
 }
