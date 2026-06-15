@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BezorgApplicatie.Models
 {
-    internal class Vehicle
+    public class Vehicle
     {
+        public int Id { get; set; }
+        public string LicensePlate { get; set; }
+
     }
 }
