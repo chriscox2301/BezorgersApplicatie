@@ -11,6 +11,7 @@ namespace BezorgApplicatie.Models
         public  int id  { get; set; }
         public string description { get; set; }
         public DateTime Date { get; set; }
+        public int PackageId { get; set; }
         public Package Package { get; set; }
     }
 }

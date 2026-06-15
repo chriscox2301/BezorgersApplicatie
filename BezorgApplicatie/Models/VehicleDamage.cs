@@ -10,7 +10,9 @@ namespace BezorgApplicatie.Models
     {
         public int Id { get; set; }
         public string Description { get; set; }
+        public int VehicleId { get; set; }
         public Vehicle Vehicle { get; set; }
+        public int ShiftId { get; set; }
         public Shift Shift { get; set; }
         public string Location { get; set; } 
 
