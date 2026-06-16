@@ -26,7 +26,7 @@ public partial class MainPage : ContentPage
             .FirstOrDefaultAsync();
 
         if (shift == null)
-        {
+        {   
             lblDate.Text = "Geen dienst gevonden";
             lblStart.Text = "";
             lblEnd.Text = "";
