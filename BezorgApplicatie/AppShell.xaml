@@ -21,7 +21,7 @@
             Icon="orders.png"
             Title="Orders"
             ContentTemplate="{DataTemplate views:AllStopsPage}"
-            Route="NewPage1" />
+            Route="AllStopsPage" />
         <ShellContent
             Icon="warning.png"
             Title="Schade"

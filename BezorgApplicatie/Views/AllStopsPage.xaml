@@ -3,20 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BezorgApplicatie.Views.AllStopsPage"
              Title="AllStopsPage">
-    <VerticalStackLayout BackgroundColor="WhiteSmoke">
-        <SearchBar Placeholder="Zoeken..."></SearchBar>
+    <VerticalStackLayout>
+        <SearchBar x:Name="Zoekbalk" Placeholder="Zoeken..." TextChanged="ZoektermIngevuld"/>
 
-        <CollectionView ItemsSource="{Binding Stops}" SelectionMode="Single">
+        <!-- "Tabs" -->
+        <HorizontalStackLayout>
+            <Button Text="Te Doen" Clicked="ToDoClicked"/>
+            <Button Text="Afgerond" Clicked="CompletedClicked"/>
+            <Button Text="Anders" Clicked="DifferentClicked"/>
+        </HorizontalStackLayout>
+
+        
+        <CollectionView x:Name="StopsList" SelectionMode="Single" SelectionChanged="StopSelected">
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate>
+                    
                     <Border StrokeThickness="1" Stroke="Black">
                         <VerticalStackLayout>
+                            <Label Text="{Binding Id, StringFormat='#{0}'}"/>
                             <Label Text="{Binding Address}" />
                             <Label Text="{Binding Packages.Count}" />
                         </VerticalStackLayout>
                     </Border>
+                    
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+            
         </CollectionView>
+        
     </VerticalStackLayout>
+    
 </ContentPage>
