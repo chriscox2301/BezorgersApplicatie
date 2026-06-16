@@ -20,7 +20,7 @@ public partial class VehicleDamagePage : ContentPage
     {
         base.OnAppearing();
 
-        // 1. Eerstvolgende shift ophalen
+       
         _currentShift = await _context.Shifts
             .Include(s => s.Vehicle)
             .OrderBy(s => s.StartTime)
@@ -32,7 +32,7 @@ public partial class VehicleDamagePage : ContentPage
             return;
         }
 
-        // 2. Originele bus tonen
+        
         lblBus.Text = $"Huidige bus: {_currentShift.Vehicle.Id}";
     }
 
@@ -56,10 +56,10 @@ public partial class VehicleDamagePage : ContentPage
             return;
         }
 
-        // 🔥 1. Originele bus bewaren
+      
         var originalVehicleId = _currentShift.VehicleId;
 
-        // 2. Alleen andere voertuigen ophalen
+        
         var vehicles = await _context.Vehicles
             .Where(v => v.Id != originalVehicleId)
             .ToListAsync();
@@ -73,14 +73,14 @@ public partial class VehicleDamagePage : ContentPage
         var random = new Random();
         _replacementVehicle = vehicles[random.Next(vehicles.Count)];
 
-        // 3. Shift updaten met nieuwe bus
+       
         _currentShift.VehicleId = _replacementVehicle.Id;
         _context.Shifts.Update(_currentShift);
 
-        // 4. Damage opslaan met ORIGINELE bus
+    
         var damage = new VehicleDamage
         {
-            VehicleId = originalVehicleId,   // 👈 BELANGRIJK (oude bus!)
+            VehicleId = originalVehicleId,   
             ShiftId = _currentShift.Id,
             Description = txtDescription.Text,
             Location = pickerLocation.SelectedItem?.ToString(),
@@ -91,19 +91,21 @@ public partial class VehicleDamagePage : ContentPage
 
         await _context.SaveChangesAsync();
 
-        // 5. Melding
+       
         string location = pickerLocation.SelectedItem?.ToString();
 
         string message = location switch
         {
-            "Onderweg" => $"🚐 Bus {_replacementVehicle.Id} komt als vervanging",
-            "Depot" => $"📦 Pak bus {_replacementVehicle.Id} in het depot",
+            "Onderweg" => $"Bus {_replacementVehicle.Id} komt als vervanging",
+            "Depot" => $" Pak bus {_replacementVehicle.Id} in het depot",
             _ => $"Bus {_replacementVehicle.Id} vervangen"
         };
 
         await DisplayAlert("Melding", message, "OK");
 
-        // 6. Terug navigeren (Shell safe)
+        txtDescription.Text = string.Empty;
+        pickerLocation.SelectedItem = null;
+ 
         await Shell.Current.GoToAsync("//MainPage");
     }
 }
