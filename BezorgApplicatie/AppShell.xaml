@@ -25,7 +25,7 @@
         <ShellContent
             Icon="warning.png"
             Title="Schade"
-            ContentTemplate="{DataTemplate views:NewPage1}"
+            ContentTemplate="{DataTemplate views:VehicleDamagePage}"
             Route="NewPage1" />
     </TabBar>
 

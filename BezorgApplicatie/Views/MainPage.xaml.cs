@@ -1,24 +1,48 @@
-﻿namespace BezorgApplicatie.Views
+﻿using BezorgApplicatie.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace BezorgApplicatie.Views;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    private readonly DataContext _context;
+
+    public MainPage(DataContext context)
     {
-        int count = 0;
+        InitializeComponent();
+        _context = context;
+    }
 
-        public MainPage()
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        var shift = await _context.Shifts
+            .Include(s => s.Warehouse)
+            .Include(s => s.Vehicle)
+            .Include(s => s.Orders)
+            .Where(s => s.StartTime >= DateTime.Now)
+            .OrderBy(s => s.StartTime)
+            .FirstOrDefaultAsync();
+
+        if (shift == null)
         {
-            InitializeComponent();
+            lblDate.Text = "Geen dienst gevonden";
+            lblStart.Text = "";
+            lblEnd.Text = "";
+            lblWarehouse.Text = "";
+            lblVehicle.Text = "";
+            lblOrders.Text = "";
+            return;
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
-        {
-            count++;
+        var orderCount = shift.Orders?.Count() ?? 0;
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
+        lblDate.Text = $"Datum: {shift.StartTime:dd-MM-yyyy}";
+        lblStart.Text = $"Starttijd: {shift.StartTime:HH:mm}";
+        lblEnd.Text = $"Eindtijd: {shift.EndTime:HH:mm}";
+        lblWarehouse.Text = $"Warehouse: {shift.Warehouse.Location}";
+        lblVehicle.Text = $"Busnummer: {shift.Vehicle.Id}";
+        lblOrders.Text = $"Aantal stops: {orderCount}";
     }
 }

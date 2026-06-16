@@ -66,7 +66,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\VehicleDamagePage.xaml.cs">
+	    <DependentUpon>VehicleDamagePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Views\NewPage1.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\VehicleDamagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

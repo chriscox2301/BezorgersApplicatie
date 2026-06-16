@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BezorgApplicatie.Views.VehicleDamagePage"
+             Title="Schade formulier">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Huidige bus -->
+            <Frame Padding="15"
+                   CornerRadius="15"
+                   BorderColor="LightGray">
+
+                <Label x:Name="lblBus"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       Text="Bus laden..." />
+
+            </Frame>
+
+            <!-- Locatie -->
+            <Label Text="Waar is de schade gebeurd?" />
+
+            <Picker x:Name="pickerLocation"
+                    Title="Selecteer locatie">
+                <Picker.Items>
+                    <x:String>Onderweg</x:String>
+                    <x:String>Depot</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <!-- Beschrijving -->
+            <Label Text="Beschrijving schade" />
+
+            <Editor x:Name="txtDescription"
+                    Placeholder="Beschrijf de schade..."
+                    HeightRequest="120" />
+
+            <!-- Submit -->
+            <Button Text="Verstuur schade"
+                    Clicked="OnSubmitClicked"
+                    BackgroundColor="DarkRed"
+                    TextColor="White"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage> 

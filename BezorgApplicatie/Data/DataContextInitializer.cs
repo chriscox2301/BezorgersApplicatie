@@ -43,15 +43,22 @@ namespace BezorgApplicatie.Data
 
             context.Loads.AddRange(loads);
 
-            
+        
+
 
             var shift = new Shift[]
             {
-                new Shift {StartTime = DateTime.Parse("2026-06-16 9:30:00"), EndTime = DateTime.Parse("2026-06-16 16:30:00"), Driver = drivers[0], Vehicle = vehicles[1],  Warehouse = warehouses[1],  Load = loads[0] },
-                new Shift {StartTime = DateTime.Parse("2026-06-18 9:30:00"), EndTime = DateTime.Parse("2026-06-18 16:30:00"), Driver = drivers[0], Vehicle = vehicles[3], Warehouse = warehouses[0],  Load = loads[0] }
+                new Shift {StartTime = DateTime.Parse("2026-08-16 9:30:00"), EndTime = DateTime.Parse("2026-08-16 16:30:00"), Driver = drivers[0], Vehicle = vehicles[1],  Warehouse = warehouses[1],  Load = loads[0] },
+                new Shift {StartTime = DateTime.Parse("2026-08-18 9:30:00"), EndTime = DateTime.Parse("2026-08-18 16:30:00"), Driver = drivers[0], Vehicle = vehicles[3], Warehouse = warehouses[0],  Load = loads[0] }
+            };
+            context.Shifts.AddRange(shift);
+
+            var orders = new Order[]
+            {
+                 new Order {Date = DateTime.Now,  Status = "Nieuw", Address = "Maastricht", Shift = shift[0]  }
             };
 
-            context.Shifts.AddRange(shift);
+            context.Orders.AddRange(orders);
 
             context.Database.EnsureCreated();
 
