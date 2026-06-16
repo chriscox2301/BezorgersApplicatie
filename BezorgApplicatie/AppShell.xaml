@@ -20,7 +20,7 @@
         <ShellContent
             Icon="orders.png"
             Title="Orders"
-            ContentTemplate="{DataTemplate views:NewPage1}"
+            ContentTemplate="{DataTemplate views:AllStopsPage}"
             Route="NewPage1" />
         <ShellContent
             Icon="warning.png"
