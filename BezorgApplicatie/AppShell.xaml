@@ -19,9 +19,9 @@
             Route="NewPage1" />
         <ShellContent
             Icon="orders.png"
-            Title="Orders"
-            ContentTemplate="{DataTemplate views:NewPage1}"
-            Route="NewPage1" />
+            Title="PakkettenScannen"
+            ContentTemplate="{DataTemplate views:PakkettenInscannen}"
+            Route="PakkettenInscannen" />
         <ShellContent
             Icon="warning.png"
             Title="Schade"
