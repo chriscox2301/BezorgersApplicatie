@@ -1,24 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              x:Class="BezorgApplicatie.Views.AllStopsPage"
              Title="AllStopsPage">
-    <VerticalStackLayout>
-        <SearchBar x:Name="Zoekbalk" Placeholder="Zoeken..." TextChanged="ZoektermIngevuld"/>
+    
+    <Grid RowDefinitions="Auto, Auto, Auto,*"
+          RowSpacing="10"
+          Padding="10">
+        
+        <HorizontalStackLayout Grid.Row="0">
+        
+            <SearchBar x:Name="Zoekbalk" Placeholder="Zoeken..." WidthRequest="325" TextChanged="ZoektermIngevuld"/>
+
+            <Button Text="📷" Clicked="ScanButton_Clicked"/>
+
+        </HorizontalStackLayout>
+        
+        <Border Grid.Row="1" x:Name="CameraVenster" IsVisible="False">
+
+            <zxing:CameraBarcodeReaderView
+                x:Name="barcodeReader"
+                BarcodesDetected="barcodeReader_BarcodesDetected" />
+
+        </Border>
 
         <!-- "Tabs" -->
-        <HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Row="2">
             <Button Text="Te Doen" Clicked="ToDoClicked"/>
             <Button Text="Afgerond" Clicked="CompletedClicked"/>
             <Button Text="Anders" Clicked="DifferentClicked"/>
         </HorizontalStackLayout>
 
-        
-        <CollectionView x:Name="StopsList" SelectionMode="Single" SelectionChanged="StopSelected">
-            
+
+        <CollectionView x:Name="StopsList" SelectionMode="Single" SelectionChanged="StopSelected" Grid.Row="3">
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    
+
                     <Border StrokeThickness="1" Stroke="Black">
                         <VerticalStackLayout>
                             <Label Text="{Binding Id, StringFormat='#{0}'}"/>
@@ -26,12 +45,12 @@
                             <Label Text="{Binding Packages.Count}" />
                         </VerticalStackLayout>
                     </Border>
-                    
+
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-            
+
         </CollectionView>
-        
-    </VerticalStackLayout>
+
+    </Grid>
     
 </ContentPage>

@@ -16,6 +16,13 @@ public partial class AllStopsPage : ContentPage
 	public AllStopsPage(DataContext dataContext)
 	{
 		InitializeComponent();
+        barcodeReader.Options = new ZXing.Net.Maui.BarcodeReaderOptions
+        {
+            AutoRotate = true,
+            Multiple = false,
+            Formats = ZXing.Net.Maui.BarcodeFormat.Ean13,
+            TryHarder = true
+        };
         _dataContext = dataContext;
         BindingContext = this;
         LaadStops();
@@ -89,4 +96,35 @@ public partial class AllStopsPage : ContentPage
         await Navigation.PushAsync(new StopDetailPage(order));
     }
 
+    private void barcodeReader_BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
+    {
+        var first = e.Results.FirstOrDefault();
+
+        if (first is null)
+            return;
+
+        Dispatcher.DispatchAsync(async () =>
+        {
+            CameraVenster.IsVisible = false;
+            barcodeReader.IsDetecting = false;
+            Zoekbalk.Text = first.Value;
+            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(200));
+            await DisplayAlert("Barcode Gedecteerd", first.Value, "OK");
+
+        });
+    }
+
+    private void ScanButton_Clicked(object sender, EventArgs e)
+    {
+        CameraVenster.IsVisible = !CameraVenster.IsVisible;
+
+        if (CameraVenster.IsVisible)
+        {
+            barcodeReader.IsDetecting = true;
+        }
+        else
+        {
+            barcodeReader.IsDetecting = false;
+        }
+    }
 }
