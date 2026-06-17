@@ -18,6 +18,9 @@ namespace BezorgApplicatie
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddTransient<Views.PakketLijstPage>();
+            builder.Services.AddTransient<Views.ProbleemMeldenPage>();
+
             builder.Services.AddDbContext<DataContext>(
                 options =>
                 {

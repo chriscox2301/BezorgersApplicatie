@@ -15,5 +15,6 @@ namespace BezorgApplicatie.Models
         public Order Order { get; set; }
         public int CartId { get; set; }
         public Cart Cart { get; set; }
+        public bool HasIssue { get; set; }
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BezorgApplicatie.Views.ProbleemMeldenPage"
+             Title="Probleem melden">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <Label Text="Pakket:" FontAttributes="Bold"/>
+            <Label x:Name="BarcodeLabel" FontSize="18"/>
+
+            <Label Text="Soort probleem:" FontAttributes="Bold"/>
+
+            <RadioButton x:Name="RadioBeschadigd"
+                         Content="Beschadigd"
+                         GroupName="IssueType"/>
+            <RadioButton x:Name="RadioVerkeerd"
+                         Content="Verkeerd pakket"
+                         GroupName="IssueType"/>
+            <RadioButton x:Name="RadioMissend"
+                         Content="Missend pakket"
+                         GroupName="IssueType"/>
+
+            <Label Text="Omschrijving:" FontAttributes="Bold"/>
+            <Editor x:Name="OmschrijvingEditor"
+                    Placeholder="Beschrijf het probleem..."
+                    HeightRequest="100"
+                    AutoSize="TextChanges"/>
+
+            <Button Text="Melden"
+                    Clicked="OnMeldenClicked"
+                    BackgroundColor="Red"
+                    TextColor="White"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
