@@ -109,7 +109,7 @@ public partial class VehicleDamagePage : ContentPage
             Title = "Nieuwe Bus",
             Subtitle = "Bus Update",
             Description = message,
-            BadgeNumber = 42,
+
             Schedule = new NotificationRequestSchedule
             {
                 NotifyTime = DateTime.Now.AddSeconds(5)
