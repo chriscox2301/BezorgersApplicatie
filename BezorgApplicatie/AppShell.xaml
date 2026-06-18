@@ -15,8 +15,8 @@
         <ShellContent
             Icon="map.png"
             Title="Kaart"
-            ContentTemplate="{DataTemplate views:NewPage1}"
-            Route="NewPage1" />
+            ContentTemplate="{DataTemplate views:DeliveryPage}"
+            Route="DeliveryPage" />
         <ShellContent
             Icon="orders.png"
             Title="Orders"
