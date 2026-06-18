@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              x:Class="BezorgApplicatie.Views.AllStopsPage"
-             Title="AllStopsPage">
+             Title="Stops">
     
     <Grid RowDefinitions="Auto, Auto, Auto,*"
           RowSpacing="10"
@@ -27,9 +27,11 @@
 
         <!-- "Tabs" -->
         <HorizontalStackLayout Grid.Row="2">
-            <Button Text="Te Doen" Clicked="ToDoClicked"/>
-            <Button Text="Afgerond" Clicked="CompletedClicked"/>
-            <Button Text="Anders" Clicked="DifferentClicked"/>
+        
+                <Button Text="Te Doen" Clicked="ToDoClicked"/>
+                <Button Text="Afgerond" Clicked="CompletedClicked" />
+                <Button Text="Anders" Clicked="DifferentClicked"/>
+         
         </HorizontalStackLayout>
 
 
