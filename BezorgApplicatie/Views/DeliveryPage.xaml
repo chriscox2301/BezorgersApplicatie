@@ -65,7 +65,7 @@
                                HorizontalOptions="Fill"
                                CornerRadius="5"
                                Padding="8">
-                        <Grid ColumnDefinitions=".15*, .35*, .25*, .25*">
+                        <Grid ColumnDefinitions=".15*, .40*, .20*, .15*">
                             <Label HorizontalTextAlignment="Center" 
                                        VerticalTextAlignment="Center" 
                                        FontAttributes="Bold"
@@ -92,5 +92,26 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <Button Grid.Row="5"
+                Grid.Column="0"
+                HeightRequest="60"
+                WidthRequest="150"
+                BackgroundColor="Blue"
+                Text="Bezorgd"
+                TextColor="White"
+                FontAttributes="Bold"
+                />
+
+        <Button Grid.Row="5"
+                Grid.Column="1"
+                HeightRequest="60"
+                WidthRequest="150"
+                BackgroundColor="Orange"
+                Text="Anders"
+                FontAttributes="Bold"
+TextColor="White"
+                />
+
     </Grid>
 </ContentPage>
