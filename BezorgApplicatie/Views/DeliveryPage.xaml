@@ -39,6 +39,8 @@
                HorizontalTextAlignment="Center"
                VerticalTextAlignment="Center"
                FontAttributes="Bold"
+               x:Name="FeedbackLabel"
+               TextColor="Red"
                />
 
         <Label Grid.Row="3"

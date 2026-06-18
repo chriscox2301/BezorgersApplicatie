@@ -38,6 +38,7 @@ public partial class DeliveryPage : ContentPage
         //await LoadShift();
         await LoadOrder();
         await LoadPackages();
+        UpdateFeedbackLabel();
     }
 
 	//private async Task LoadShift()
@@ -106,6 +107,7 @@ public partial class DeliveryPage : ContentPage
             if (matchedPackage != null)
             {
                 matchedPackage.Status = "Present";
+                UpdateFeedbackLabel();
                 Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(50));
                 await DisplayAlert("Goed", $"Pakketnummer {matchedPackage.Number}", "Ok");
                 await _dataContext.SaveChangesAsync();
@@ -119,10 +121,23 @@ public partial class DeliveryPage : ContentPage
             barcodeReader.IsDetecting = true;
         });
     }
+    private void UpdateFeedbackLabel()
+    {
+        int current = Packages.Count(p => !string.IsNullOrEmpty(p.Status));
+        int total = Packages.Count;
+        if (current == total)
+        {
+            FeedbackLabel.TextColor = Colors.Green;
+        }
+
+        FeedbackLabel.Text = $"{current}/{total}";
+    }
+
 }
 
 //TODO:
-//2/3 packages
+//Handmatig invoeren
 //Probleem Melden
 //Bezorgd
 //Anders
+//meer package meer orders
