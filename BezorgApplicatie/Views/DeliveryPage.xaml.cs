@@ -120,3 +120,9 @@ public partial class DeliveryPage : ContentPage
         });
     }
 }
+
+//TODO:
+//2/3 packages
+//Probleem Melden
+//Bezorgd
+//Anders
