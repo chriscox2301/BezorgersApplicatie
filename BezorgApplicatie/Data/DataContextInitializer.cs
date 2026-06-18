@@ -22,6 +22,28 @@ namespace BezorgApplicatie.Data
             };
             context.Drivers.AddRange(drivers);
 
+            var warehouse = new Warehouse { Location = "Amsterdam" };
+            context.Warehouses.Add(warehouse);
+
+            var cart = new Cart { Warehouse = warehouse, VehicleZone = "A1" };
+            context.Carts.Add(cart);
+
+            var orders = new Order[]
+            {
+                new Order { Date = DateTime.Now, Status = "Open", Address = "Damrak 1, Amsterdam" },
+                new Order { Date = DateTime.Now, Status = "Open", Address = "Kalverstraat 5, Amsterdam" },
+                new Order { Date = DateTime.Now, Status = "Open", Address = "Nieuwendijk 10, Amsterdam" }
+            };
+            context.Orders.AddRange(orders);
+
+            var packages = new Package[]
+            {
+                new Package { Weight = 1.5, Barcode = "PKG001", Order = orders[0], Cart = cart, HasIssue = false },
+                new Package { Weight = 2.3, Barcode = "PKG002", Order = orders[1], Cart = cart, HasIssue = false },
+                new Package { Weight = 0.8, Barcode = "PKG003", Order = orders[2], Cart = cart, HasIssue = false }
+            };
+            context.Packages.AddRange(packages);
+
             context.SaveChanges();
 
             context.Database.EnsureCreated();
