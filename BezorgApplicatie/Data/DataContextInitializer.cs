@@ -50,12 +50,12 @@ namespace BezorgApplicatie.Data
 
             var packages = new Package[]
             {
-                new Package { Weight = 2.5, Barcode = "PKG001", OrderId = orders[0].Id, CartId = cart.Id },
-                new Package { Weight = 1.8, Barcode = "PKG002", OrderId = orders[0].Id, CartId = cart.Id },
-                new Package { Weight = 3.2, Barcode = "PKG003", OrderId = orders[0].Id, CartId = cart.Id },
-                new Package { Weight = 1.5, Barcode = "PKG004", OrderId = orders[1].Id, CartId = cart.Id },
-                new Package { Weight = 2.1, Barcode = "PKG005", OrderId = orders[1].Id, CartId = cart.Id },
-                new Package { Weight = 2.7, Barcode = "PKG006", OrderId = orders[1].Id, CartId = cart.Id}
+                new Package { Weight = 2.5, Barcode = "PKG001", OrderId = orders[0].Id, CartId = cart.Id, Number = 012 },
+                new Package { Weight = 1.8, Barcode = "PKG002", OrderId = orders[0].Id, CartId = cart.Id, Number = 013 },
+                new Package { Weight = 3.2, Barcode = "PKG003", OrderId = orders[0].Id, CartId = cart.Id, Number = 014 },
+                new Package { Weight = 1.5, Barcode = "PKG004", OrderId = orders[1].Id, CartId = cart.Id, Number = 015 },
+                new Package { Weight = 2.1, Barcode = "PKG005", OrderId = orders[1].Id, CartId = cart.Id, Number = 016 },
+                new Package { Weight = 2.7, Barcode = "PKG006", OrderId = orders[1].Id, CartId = cart.Id, Number = 017 }
             };
             context.Packages.AddRange(packages);
             context.SaveChanges();

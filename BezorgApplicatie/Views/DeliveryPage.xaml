@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              x:Class="BezorgApplicatie.Views.DeliveryPage"
              Title="DeliveryPage">
-    <ScrollView>
-        <VerticalStackLayout>
-            <Label Text="{Binding Order.Status}" />
-            <CollectionView ItemsSource="{Binding Packages}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding Barcode}"/>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </VerticalStackLayout>
-    </ScrollView>
-</ContentPage>
+
+    <Grid 
+        RowDefinitions=".10*, .30*, .10*, .30*, .10*"
+        ColumnDefinitions=".50*, .50*">
+
+        <Label Grid.Row="0"
+               Grid.ColumnSpan="2"
+               Text="Bezorgen"
+               FontAttributes="Bold"
+               FontSize="24"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <Border Grid.Row="1"
+                Grid.ColumnSpan="2">
+            <zxing:CameraBarcodeReaderView
+            x:Name="barcodeReader"
+            BarcodesDetected="barcodeReader_BarcodesDetected"/>
+        </Border>
+
+        <Label Grid.Row="0"
+               Grid.ColumnSpan="2"
+               x:Name="PackageCount">
+               
+        </Label>
+
+
+    </Grid>
+</ContentPage>       

@@ -2,6 +2,7 @@ using BezorgApplicatie.Data;
 using BezorgApplicatie.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using ZXing.Net.Maui;
 
 namespace BezorgApplicatie.Views;
 
@@ -12,11 +13,18 @@ public partial class DeliveryPage : ContentPage
 	//public Shift Shift { get; set; }
 	public Order Order {  get; set; }
 	public ObservableCollection<Package> Packages { get; set; }
-	
 
-	public DeliveryPage(DataContext dataContext)
+
+    public DeliveryPage(DataContext dataContext)
 	{
 		InitializeComponent();
+		barcodeReader.Options = new BarcodeReaderOptions
+		{
+			AutoRotate = true,
+			Multiple = false,
+			Formats = BarcodeFormat.Code39,
+			TryHarder = true
+		};
 		_dataContext = dataContext;
 		//Shift = new Shift();
 		Order = new Order();
@@ -34,7 +42,7 @@ public partial class DeliveryPage : ContentPage
 
 	//private async Task LoadShift()
 	//{
-	//	//Placeholder -> Takes the first shift of the driver named Piet.
+	//	Placeholder->Takes the first shift of the driver named Piet.
 	//	try
 	//	{
 	//		await _dataContext.Database.EnsureCreatedAsync();
@@ -44,17 +52,17 @@ public partial class DeliveryPage : ContentPage
 	//	catch (Exception ex)
 	//	{
 	//		await DisplayAlert("Error", $"Er ging iets fout bij het laden van de huidige dienst: {ex.Message}", "OK");
- //       }
+	//	}
 	//}
 
-    private async Task LoadOrder()
+	private async Task LoadOrder()
     {
 		//Placeholder -> Takes the first Order in the db.
         try
         {
             await _dataContext.Database.EnsureCreatedAsync();
             Order = await _dataContext.Orders.FirstAsync();
-            OnPropertyChanged(nameof(Order));
+			OnPropertyChanged(nameof(Order));
         }
         catch (Exception ex)
         {
@@ -78,5 +86,37 @@ public partial class DeliveryPage : ContentPage
         {
             await DisplayAlert("Error", $"Er ging iets fout bij het laden van de pakketten: {ex.Message}", "OK");
         }
+    }
+
+    private void barcodeReader_BarcodesDetected(object sender, BarcodeDetectionEventArgs e)
+    {
+		//When a barcode is scanned it searches the current order for a package with that barcode
+		//and updates the status accordingly
+		var first = e.Results.FirstOrDefault();
+		if (first == null)
+		{
+			return;
+		}
+
+		Dispatcher.DispatchAsync(async () =>
+		{
+            barcodeReader.IsDetecting = false;
+			foreach (Package package in Packages)
+			{
+				if(package.Barcode == first.Value)
+				{
+					package.Status = "Present";
+					Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(50));
+					await DisplayAlert("Goed", $"Pakketnummer {package.Number}", "Ok");
+				}
+				else
+				{
+                    await DisplayAlert("Fout", $"Dit pakket is niet in deze Order", "Ok");
+                }
+			}
+
+            await Task.Delay(2000);
+            barcodeReader.IsDetecting = true;
+        });
     }
 }
