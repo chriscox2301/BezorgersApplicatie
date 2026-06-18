@@ -20,7 +20,7 @@ public partial class AllStopsPage : ContentPage
         {
             AutoRotate = true,
             Multiple = false,
-            Formats = ZXing.Net.Maui.BarcodeFormat.Ean13,
+            Formats = ZXing.Net.Maui.BarcodeFormat.Code128,
             TryHarder = true
         };
         _dataContext = dataContext;
