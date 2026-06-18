@@ -10,7 +10,6 @@ namespace BezorgApplicatie.Models
     public class Package
     {
         public int Id { get; set; }
-        [MinLength(3), MaxLength(3)]
         public int Number { get; set; }
         public double Weight { get; set; }
         public string Barcode { get; set; }

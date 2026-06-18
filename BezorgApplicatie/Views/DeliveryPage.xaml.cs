@@ -22,8 +22,8 @@ public partial class DeliveryPage : ContentPage
 		{
 			AutoRotate = true,
 			Multiple = false,
-			Formats = BarcodeFormat.Code39,
-			TryHarder = true
+			Formats = BarcodeFormat.Code128 | BarcodeFormat.Code39 | BarcodeFormat.Ean13,
+            TryHarder = true
 		};
 		_dataContext = dataContext;
 		//Shift = new Shift();
@@ -98,24 +98,24 @@ public partial class DeliveryPage : ContentPage
 			return;
 		}
 
-		Dispatcher.DispatchAsync(async () =>
-		{
+        Dispatcher.DispatchAsync(async () =>
+        {
             barcodeReader.IsDetecting = false;
-			foreach (Package package in Packages)
-			{
-				if(package.Barcode == first.Value)
-				{
-					package.Status = "Present";
-					Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(50));
-					await DisplayAlert("Goed", $"Pakketnummer {package.Number}", "Ok");
-				}
-				else
-				{
-                    await DisplayAlert("Fout", $"Dit pakket is niet in deze Order", "Ok");
-                }
-			}
+            var matchedPackage = Packages.FirstOrDefault(p => p.Barcode == first.Value);
 
-            await Task.Delay(2000);
+            if (matchedPackage != null)
+            {
+                matchedPackage.Status = "Present";
+                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(50));
+                await DisplayAlert("Goed", $"Pakketnummer {matchedPackage.Number}", "Ok");
+                await _dataContext.SaveChangesAsync();
+            }
+            else
+            {
+                await DisplayAlert("Fout", $"Dit pakket is niet in deze Order", "Ok");
+            }
+
+            await Task.Delay(3000);
             barcodeReader.IsDetecting = true;
         });
     }

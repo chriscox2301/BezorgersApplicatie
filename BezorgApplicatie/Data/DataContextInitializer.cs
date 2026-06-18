@@ -36,13 +36,15 @@ namespace BezorgApplicatie.Data
                 {
                     Date = DateTime.Now,
                     Status = "Pending",
-                    Address = "123 Main Street, Amsterdam"
+                    Address = "123 Main Street, Amsterdam",
+                    Location = "A"
                 },
                 new Order
                 {
                     Date = DateTime.Now.AddDays(1),
                     Status = "Pending",
-                    Address = "456 Oak Avenue, Rotterdam"
+                    Address = "456 Oak Avenue, Rotterdam",
+                    Location = "B"
                 }
             };
             context.Orders.AddRange(orders);
