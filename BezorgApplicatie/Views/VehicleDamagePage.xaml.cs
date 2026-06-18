@@ -1,6 +1,8 @@
 using BezorgApplicatie.Data;
 using BezorgApplicatie.Models;
 using Microsoft.EntityFrameworkCore;
+using Plugin.LocalNotification;
+using Plugin.LocalNotification.AndroidOption;
 
 namespace BezorgApplicatie.Views;
 
@@ -100,8 +102,23 @@ public partial class VehicleDamagePage : ContentPage
             "Depot" => $" Pak bus {_replacementVehicle.Id} in het depot",
             _ => $"Bus {_replacementVehicle.Id} vervangen"
         };
+        // Windows machine werkt niet door dit stuk hieronder. gebruik android local device of emulator 
+        var request = new NotificationRequest
+        {
+            NotificationId = 1337,
+            Title = "Nieuwe Bus",
+            Subtitle = "Bus Update",
+            Description = message,
+            BadgeNumber = 42,
+            Schedule = new NotificationRequestSchedule
+            {
+                NotifyTime = DateTime.Now.AddSeconds(5)
+            },
 
-        await DisplayAlert("Melding", message, "OK");
+ 
+
+        }; 
+        LocalNotificationCenter.Current.Show(request);
 
         txtDescription.Text = string.Empty;
         pickerLocation.SelectedItem = null;

@@ -7,7 +7,7 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
-            <!-- Huidige bus -->
+       
             <Frame Padding="15"
                    CornerRadius="15"
                    BorderColor="LightGray">
