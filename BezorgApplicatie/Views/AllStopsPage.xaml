@@ -4,7 +4,7 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              x:Class="BezorgApplicatie.Views.AllStopsPage"
              Title="Stops">
-    
+    <ScrollView>
     <Grid RowDefinitions="Auto, Auto, Auto,*"
           RowSpacing="10"
           Padding="10">
@@ -40,11 +40,15 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
 
-                    <Border StrokeThickness="1" Stroke="Black">
+                    <Border StrokeThickness="2" Stroke="Black" StrokeShape="10">
                         <VerticalStackLayout>
-                            <Label Text="{Binding Id, StringFormat='#{0}'}"/>
-                            <Label Text="{Binding Address}" />
-                            <Label Text="{Binding Packages.Count}" />
+                            <Grid RowSpacing="10" RowDefinitions="Auto, Auto, Auto, Auto" Padding="10">
+                                <Label Text="{Binding Id, StringFormat='#{0}'}" Grid.Row="0"/>
+                                    <Label Text="{Binding Status}" HorizontalOptions="End"/>
+                                    <Label Text="{Binding Address}" Grid.Row="1" />
+                                <Label Text="{Binding Packages.Count, StringFormat='📦: {0}'}" Grid.Row="2" />
+                                <Label Text=">" HorizontalOptions="End" Grid.Row="1"/>
+                            </Grid>
                         </VerticalStackLayout>
                     </Border>
 
@@ -54,5 +58,6 @@
         </CollectionView>
 
     </Grid>
-    
+    </ScrollView>
+
 </ContentPage>

@@ -28,12 +28,25 @@ public partial class AllStopsPage : ContentPage
         LaadStops();
         OrderStatus = "Onderweg";
         Filter();
-        
-	}
 
-    public async void LaadStops()
+        Dispatcher.StartTimer(TimeSpan.FromMinutes(5), () =>
+        {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                
+                await LaadStops();
+                Filter();
+            });
+
+            return true;
+        });
+    }
+
+
+    public async Task LaadStops()
     {
         var stops = await _dataContext.Orders
+                        .AsNoTracking()
                         .Include(s => s.Packages)
                         .ToArrayAsync();
 
