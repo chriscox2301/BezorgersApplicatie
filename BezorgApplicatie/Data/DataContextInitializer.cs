@@ -24,7 +24,6 @@ namespace BezorgApplicatie.Data
 
             var warehouse = new Warehouse { Location = "Amsterdam" };
             context.Warehouses.Add(warehouse);
-
             var cart = new Cart { Warehouse = warehouse, VehicleZone = "A1" };
             context.Carts.Add(cart);
 

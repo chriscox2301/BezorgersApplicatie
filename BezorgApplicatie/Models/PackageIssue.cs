@@ -8,7 +8,7 @@ namespace BezorgApplicatie.Models
 {
     public class PackageIssue
     {
-        public int Id { get; set; }
+        public  int Id  { get; set; }
         public string IssueType { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }

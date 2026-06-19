@@ -13,6 +13,6 @@ namespace BezorgApplicatie.Models
         public IEnumerable<Package> Packages { get; set; }
         public string Status { get; set; }
         public string Address { get; set; }
-
+        public string? Location { get; set; }
     }
 }

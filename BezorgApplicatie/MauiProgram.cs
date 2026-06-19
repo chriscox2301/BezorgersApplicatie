@@ -2,6 +2,7 @@
 using BezorgApplicatie.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using ZXing.Net.Maui.Controls;
 
 namespace BezorgApplicatie
 {
@@ -16,7 +17,8 @@ namespace BezorgApplicatie
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .UseBarcodeReader();
 
             builder.Services.AddTransient<Views.PakketLijstPage>();
             builder.Services.AddTransient<Views.ProbleemMeldenPage>();
