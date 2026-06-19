@@ -20,6 +20,7 @@ namespace BezorgApplicatie.Data
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Package> Packages { get; set; }
         public DbSet<PackageIssue> PackageIssues { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 

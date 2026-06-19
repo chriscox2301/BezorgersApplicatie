@@ -4,22 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BezorgApplicatie.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BezorgApplicatie.Data
 {
     public class DataContextInitializer
     {
         public static void Initialize(DataContext context)
-        {   
-            if (context == null)
-            {
-                context.Database.Migrate();
-            }
-
-            context.Database.EnsureCreated();
+        {
+            //Zorgt ervoor dat initializer NIET gedaan wordt wanneer er al data in zit.
+            if (context.Drivers.Any())
+                return;
 
             var vehicles = new Vehicle[]
             {
