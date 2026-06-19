@@ -42,5 +42,6 @@ namespace BezorgApplicatie.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public bool hasIssue { get; set; }
     }
 }
