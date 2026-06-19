@@ -45,7 +45,7 @@ namespace BezorgApplicatie
 
                 context.Database.EnsureCreated();
 
-                //DataContextInitializer.Initialize(context);
+                DataContextInitializer.Initialize(context);
             }
 
             return app;

@@ -15,6 +15,13 @@ namespace BezorgApplicatie.Data
             if (context.Drivers.Any())
                 return;
 
+            var vehicles = new Vehicle[]
+            {
+                new Vehicle {LicensePlate = "TL-123-R"},
+                new Vehicle {LicensePlate = "PB-234-Z"}
+            };
+            context.Vehicles.AddRange(vehicles);
+
             var drivers = new Driver[]
             {
                 new Driver {Name = "Piet"},
@@ -27,11 +34,17 @@ namespace BezorgApplicatie.Data
             var cart = new Cart { Warehouse = warehouse, VehicleZone = "A1" };
             context.Carts.Add(cart);
 
+            var loads = new Load[]
+            {
+                new Load { Warehouse = warehouse}
+            };
+            context.Loads.AddRange(loads);
+
             var orders = new Order[]
             {
-                new Order { Date = DateTime.Now, Status = "Open", Address = "Damrak 1, Amsterdam" },
-                new Order { Date = DateTime.Now, Status = "Open", Address = "Kalverstraat 5, Amsterdam" },
-                new Order { Date = DateTime.Now, Status = "Open", Address = "Nieuwendijk 10, Amsterdam" }
+                new Order { Date = DateTime.Now, Status = "Onderweg", Address = "Damrak 1, Amsterdam" },
+                new Order { Date = DateTime.Now, Status = "Onderweg", Address = "Kalverstraat 5, Amsterdam" },
+                new Order { Date = DateTime.Now, Status = "Onderweg", Address = "Nieuwendijk 10, Amsterdam" }
             };
             context.Orders.AddRange(orders);
 
@@ -42,6 +55,12 @@ namespace BezorgApplicatie.Data
                 new Package { Weight = 0.8, Barcode = "PKG003", Order = orders[2], Cart = cart, HasIssue = false }
             };
             context.Packages.AddRange(packages);
+
+            var shift = new Shift[]
+            {
+                new Shift { Orders = orders, Driver = drivers[0], StartTime = DateTime.Parse("2026-06-25 08:00:00"), EndTime = DateTime.Parse("2026-06-25 16:00:00"), Warehouse = warehouse, Vehicle = vehicles[0], Load = loads[0]}
+            };
+            context.Shifts.AddRange(shift);
 
             context.SaveChanges();
 
