@@ -12,10 +12,21 @@ public partial class VehicleDamagePage : ContentPage
     private Shift _currentShift;
     private Vehicle _replacementVehicle;
 
+    public Shift CurrentShift
+    {
+        get => _currentShift;
+        set
+        {
+            _currentShift = value;
+            OnPropertyChanged();
+        }
+    }
+
     public VehicleDamagePage(DataContext context)
     {
         InitializeComponent();
         _context = context;
+        BindingContext = this; 
     }
 
     protected override async void OnAppearing()
@@ -23,19 +34,15 @@ public partial class VehicleDamagePage : ContentPage
         base.OnAppearing();
 
        
-        _currentShift = await _context.Shifts
+        CurrentShift = await _context.Shifts
             .Include(s => s.Vehicle)
             .OrderBy(s => s.StartTime)
             .FirstOrDefaultAsync(s => s.StartTime >= DateTime.Now);
 
-        if (_currentShift == null)
-        {
-            lblBus.Text = "Geen actieve shift gevonden";
-            return;
-        }
+        OnPropertyChanged(nameof(CurrentShift));
 
-        
-        lblBus.Text = $"Huidige bus: {_currentShift.Vehicle.Id}";
+
+     
     }
 
     private async void OnSubmitClicked(object sender, EventArgs e)

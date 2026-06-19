@@ -11,46 +11,51 @@
                    FontAttributes="Bold"
                    HorizontalOptions="Center" />
 
-            <Frame Padding="20"
-                   CornerRadius="15"
-                   HasShadow="True"
-                   BackgroundColor="White"
-                   BorderColor="LightGray">
+            <Border Stroke="LightGray"
+                    StrokeThickness="1"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 15"
+                    Padding="20">
 
-                <VerticalStackLayout Spacing="12">
+            <Border.Shadow>
+            <Shadow Opacity="0.3"
+                    Radius="10"
+                    Offset="2,2" />
+            </Border.Shadow>
 
-                    <Label x:Name="lblDate"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="Black" />
+            <VerticalStackLayout Spacing="12">
 
-                    <BoxView HeightRequest="1"
-                             Color="LightGray" />
+            <Label Text="{Binding Shift.StartTime, StringFormat='Datum: {0:dd-MM-yyyy}'}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="Black" />
 
-                    <Label x:Name="lblStart"
-                           FontSize="16"
-                           TextColor="Black" />
+            <BoxView HeightRequest="1"
+                     Color="LightGray" />
 
-                    <Label x:Name="lblEnd"
-                           FontSize="16"
-                           TextColor="Black" />
+            <Label Text="{Binding Shift.StartTime, StringFormat='Starttijd: {0:HH:mm}'}"
+                   FontSize="18"
+                   TextColor="Black" />
 
-                    <Label x:Name="lblWarehouse"
-                           FontSize="16"
-                           TextColor="Black" />
-                    
-                    <Label x:Name="lblOrders"
-                           FontSize="16"
-                           TextColor="Black" />
+            <Label Text="{Binding Shift.EndTime, StringFormat='Eindtijd: {0:HH:mm}'}"
+                   FontSize="16"
+                   TextColor="Black" />
 
-                    <Label x:Name="lblVehicle"
-                           FontSize="16"
-                           TextColor="Black" />
+            <Label Text="{Binding Shift.Warehouse.Location, StringFormat='Depot: {0}'}"
+                   FontSize="16"
+                   TextColor="Black" />
+
+            <Label Text="{Binding Shift.Orders.Count, StringFormat='Aantal stops: {0}'}"
+                   FontSize="16"
+                   TextColor="Black" />
+
+            <Label Text="{Binding Shift.Vehicle.Id, StringFormat='Busnummer: {0}'}"
+                   FontSize="16"
+                   TextColor="Black" />
 
                 </VerticalStackLayout>
 
-            </Frame>
-
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 

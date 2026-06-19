@@ -7,17 +7,17 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
-       
-            <Frame Padding="15"
-                   CornerRadius="15"
-                   BorderColor="LightGray">
+            <Border Stroke="LightGray"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 15"
+                    
+                    Padding="15">
 
-                <Label x:Name="lblBus"
-                       FontSize="20"
-                       FontAttributes="Bold"
-                       Text="Bus laden..." />
+            <Label Text="{Binding CurrentShift.Vehicle.Id, StringFormat='Busnummer: {0}'}"
+                   FontSize="20"
+                   FontAttributes="Bold" />
 
-            </Frame>
+            </Border>
 
             <!-- Locatie -->
             <Label Text="Waar is de schade gebeurd?" />
