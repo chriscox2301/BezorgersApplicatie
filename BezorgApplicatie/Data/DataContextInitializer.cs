@@ -18,81 +18,38 @@ namespace BezorgApplicatie.Data
             var drivers = new Driver[]
             {
                 new Driver {Name = "Piet"},
-                new Driver {Name = "Henk"}
+              
             };
             context.Drivers.AddRange(drivers);
 
+            var warehouse = new Warehouse { Location = "Amsterdam" };
+            context.Warehouses.Add(warehouse);
+            var cart = new Cart { Warehouse = warehouse, VehicleZone = "A1" };
+            context.Carts.Add(cart);
+
             var orders = new Order[]
             {
-                new Order
-                {
-                    Date = DateTime.Parse("2026-06-16"),
-                    Address = "Stationsstraat 10",
-                    Status = "Onderweg",
-                    Packages = new List<Package>
-                    {
-                        new Package
-                        {
-                            Barcode = "PKG001"
-
-                        },
-                        new Package
-                        {
-                            Barcode = "PKG002"
-                        }
-                    }
-                },
-                new Order
-                {
-                    Date = DateTime.Parse("2026-06-16"),
-                    Address = "Dorpsplein 25",
-                    Status = "Onderweg",
-                    Packages = new List<Package>
-                    {
-                        new Package
-                        {
-                            Barcode = "PKG003"
-                        }
-                    }
-                },
-                new Order
-                {
-                    Date = DateTime.Parse("2026-06-16"),
-                    Address = "Kerklaan 7",
-                    Status = "Onderweg",
-                    Packages = new List<Package>
-                    {
-                        new Package
-                        {
-                            Barcode = "PKG004"
-                        }
-                    }
-                }
+                new Order { Date = DateTime.Now, Status = "Open", Address = "Damrak 1, Amsterdam" },
+                new Order { Date = DateTime.Now, Status = "Open", Address = "Kalverstraat 5, Amsterdam" },
+                new Order { Date = DateTime.Now, Status = "Open", Address = "Nieuwendijk 10, Amsterdam" }
             };
-
             context.Orders.AddRange(orders);
 
-            var shifts = new Shift[]
+            var packages = new Package[]
             {
-                new Shift
-                {
-                    StartTime = DateTime.Parse("2026-06-16 08:00:00"),
-                    EndTime = DateTime.Parse("2026-06-16 16:00:00"),
-                    Driver = drivers[0],
-                    Vehicle = new Vehicle
-                    {
-                        LicensePlate = "TL-123-R"
-                    },
-                    Orders = orders.ToList()
-                }
+                new Package { Weight = 1.5, Barcode = "PKG001", Order = orders[0], Cart = cart, HasIssue = false },
+                new Package { Weight = 2.3, Barcode = "PKG002", Order = orders[1], Cart = cart, HasIssue = false },
+                new Package { Weight = 0.8, Barcode = "PKG003", Order = orders[2], Cart = cart, HasIssue = false }
             };
-
-            context.Shifts.AddRange(shifts);
-
+            context.Packages.AddRange(packages);
 
             context.SaveChanges();
 
             context.Database.EnsureCreated();
+
+            context.SaveChanges(); 
+
+
         }
     }
 }
