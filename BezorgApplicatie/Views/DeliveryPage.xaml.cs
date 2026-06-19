@@ -20,7 +20,7 @@ public partial class DeliveryPage : ContentPage
 
     public DeliveryPage(DataContext dataContext)
 	{
-		InitializeComponent();
+        InitializeComponent();
 		barcodeReader.Options = new BarcodeReaderOptions
 		{
 			AutoRotate = true,
@@ -187,7 +187,12 @@ public partial class DeliveryPage : ContentPage
         }
         FeedbackLabel.Text = $"{current}/{total}";
     }
-
+    private async void OnProblemClicked(object sender, EventArgs e)
+    {
+        if (sender is not Button button || button.BindingContext is not Package package)
+            return;
+            await Shell.Current.GoToAsync($"{nameof(ProblemPage)}?pakketId={package.Id}");
+    }
     private async void BezorgdBtn_Clicked(object sender, EventArgs e)
     {
         Order.Status = "Bezorgd";
