@@ -79,6 +79,7 @@
                                        Text="{Binding Barcode}" 
                                        TextColor="Black"/>
                             <Button Grid.Column="2"
+                                        Clicked="OnProblemClicked"
                                         WidthRequest="65"
                                         BackgroundColor="Red"/>
                             <Label HorizontalTextAlignment="Center" 
