@@ -2,6 +2,7 @@
 using BezorgApplicatie.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Plugin.LocalNotification;
 using ZXing.Net.Maui.Controls;
 
 namespace BezorgApplicatie
