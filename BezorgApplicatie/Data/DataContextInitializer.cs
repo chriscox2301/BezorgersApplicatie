@@ -42,9 +42,9 @@ namespace BezorgApplicatie.Data
 
             var orders = new Order[]
             {
-                new Order { Date = DateTime.Now, Status = "Onderweg", Address = "Damrak 1, Amsterdam" },
-                new Order { Date = DateTime.Now, Status = "Onderweg", Address = "Kalverstraat 5, Amsterdam" },
-                new Order { Date = DateTime.Now, Status = "Onderweg", Address = "Nieuwendijk 10, Amsterdam" }
+                new Order { Date = DateTime.Now, Status = "Onderweg", Address = "Damrak 1, Amsterdam", Location="A" },
+                new Order { Date = DateTime.Now, Status = "Onderweg", Address = "Kalverstraat 5, Amsterdam", Location="A" },
+                new Order { Date = DateTime.Now, Status = "Onderweg", Address = "Nieuwendijk 10, Amsterdam", Location="A" }
             };
             context.Orders.AddRange(orders);
 
