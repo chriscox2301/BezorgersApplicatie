@@ -20,9 +20,14 @@
             Route="DeliveryPage" />
         <ShellContent
             Icon="orders.png"
+            Title="PakkettenScannen"
+            ContentTemplate="{DataTemplate views:PakkettenInscannen}"
+            Route="PakkettenInscannen" />
+        <ShellContent
             Title="Orders"
             ContentTemplate="{DataTemplate views:AllStopsPage}"
             Route="AllStopsPage" />
+
         <ShellContent
             Icon="warning.png"
             Title="Schade"
