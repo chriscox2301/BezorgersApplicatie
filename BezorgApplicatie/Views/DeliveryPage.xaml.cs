@@ -2,6 +2,8 @@ using BezorgApplicatie.Data;
 using BezorgApplicatie.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using ZXing.Net.Maui;
 
 namespace BezorgApplicatie.Views;
@@ -28,8 +30,11 @@ public partial class DeliveryPage : ContentPage
 		_dataContext = dataContext;
 		//Shift = new Shift();
 		Order = new Order();
+
 		Packages = new ObservableCollection<Package>();
-		BindingContext = this;
+        Packages.CollectionChanged += Packages_CollectionChanged;
+
+        BindingContext = this;
 		InitPage();
 	}
 
@@ -41,22 +46,28 @@ public partial class DeliveryPage : ContentPage
         UpdateFeedbackLabel();
     }
 
-	//private async Task LoadShift()
-	//{
-	//	Placeholder->Takes the first shift of the driver named Piet.
-	//	try
-	//	{
-	//		await _dataContext.Database.EnsureCreatedAsync();
-	//		var shift = await _dataContext.Shifts.Where(s => s.Driver.Name == "Piet").FirstAsync();
-	//		Shift = shift;
-	//	}
-	//	catch (Exception ex)
-	//	{
-	//		await DisplayAlert("Error", $"Er ging iets fout bij het laden van de huidige dienst: {ex.Message}", "OK");
-	//	}
-	//}
+    protected virtual void OnAppearing()
+    {
+        base.OnAppearing();
+        InitPage();
+    }
 
-	private async Task LoadOrder()
+    //private async Task LoadShift()
+    //{
+    //	Placeholder->Takes the first shift of the driver named Piet.
+    //	try
+    //	{
+    //		await _dataContext.Database.EnsureCreatedAsync();
+    //		var shift = await _dataContext.Shifts.Where(s => s.Driver.Name == "Piet").FirstAsync();
+    //		Shift = shift;
+    //	}
+    //	catch (Exception ex)
+    //	{
+    //		await DisplayAlert("Error", $"Er ging iets fout bij het laden van de huidige dienst: {ex.Message}", "OK");
+    //	}
+    //}
+
+    private async Task LoadOrder()
     {
 		//Placeholder -> Takes the first Order in the db.
         try
@@ -107,7 +118,6 @@ public partial class DeliveryPage : ContentPage
             if (matchedPackage != null)
             {
                 matchedPackage.Status = "Present";
-                UpdateFeedbackLabel();
                 Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(50));
                 await DisplayAlert("Goed", $"Pakketnummer {matchedPackage.Number}", "Ok");
                 await _dataContext.SaveChangesAsync();
@@ -121,6 +131,39 @@ public partial class DeliveryPage : ContentPage
             barcodeReader.IsDetecting = true;
         });
     }
+
+    private void Packages_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        // Zorgt ervoor dat als een package wordt toegevoegde aan de colleciton, 
+        // dat hij de Package_PropertyChanged aanroept als er iets in de package verandert
+        if (e.NewItems != null)
+        {
+            foreach (Package package in e.NewItems)
+            {
+                package.PropertyChanged += Package_PropertyChanged;
+            }
+        }
+
+        // Zorgt ervoor dat als een item in de collection wordt verwijdert, 
+        // dat hij niet meer de Package_PropertyChanged aanroept als hij verandert wordt.
+        if (e.OldItems != null)
+        {
+            foreach (Package package in e.OldItems)
+            {
+                package.PropertyChanged -= Package_PropertyChanged;
+            }
+        }
+    }
+
+    private void Package_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        //Controleert of het veranderde property de Status was.
+        if (e.PropertyName == nameof(Package.Status))
+        {
+            UpdateFeedbackLabel();
+        }
+    }
+
     private void UpdateFeedbackLabel()
     {
         int current = Packages.Count(p => !string.IsNullOrEmpty(p.Status));
@@ -128,16 +171,24 @@ public partial class DeliveryPage : ContentPage
         if (current == total)
         {
             FeedbackLabel.TextColor = Colors.Green;
+            BezorgdBtn.IsEnabled = true;
+            BezorgdBtn.BackgroundColor = Colors.Blue;
+            AndersBtn.IsEnabled = true;
+            AndersBtn.BackgroundColor = Colors.Orange;
         }
-
         FeedbackLabel.Text = $"{current}/{total}";
     }
     private async void OnProblemClicked(object sender, EventArgs e)
     {
         if (sender is not Button button || button.BindingContext is not Package package)
             return;
-
-        await Shell.Current.GoToAsync($"{nameof(ProblemPage)}?pakketId={package.Id}");
+            await Shell.Current.GoToAsync($"{nameof(ProblemPage)}?pakketId={package.Id}");
+    }
+    private async void BezorgdBtn_Clicked(object sender, EventArgs e)
+    {
+        Order.Status = "Bezorgd";
+        await _dataContext.SaveChangesAsync();
+        await Shell.Current.GoToAsync("//MainPage");
     }
 }
 
