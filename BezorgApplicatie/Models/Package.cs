@@ -36,12 +36,6 @@ namespace BezorgApplicatie.Models
 
         public int CartId { get; set; }
         public Cart Cart { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        public bool hasIssue { get; set; }
+        public bool HasIssue { get; set; }
     }
 }

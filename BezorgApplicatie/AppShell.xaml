@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:BezorgApplicatie.Views"
+    xmlns:local="clr-namespace:BezorgApplicatie"
     Title="BezorgApplicatie">
 
     <TabBar>
@@ -24,9 +25,9 @@
             Route="NewPage1" />
         <ShellContent
             Icon="warning.png"
-            Title="Schade"
-            ContentTemplate="{DataTemplate views:NewPage1}"
-            Route="NewPage1" />
+            Title="Probleem"
+            ContentTemplate="{DataTemplate views:PakketLijstPage}"
+            Route="PakketLijstPage" />
     </TabBar>
 
 </Shell>
