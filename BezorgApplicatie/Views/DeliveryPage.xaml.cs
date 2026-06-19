@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using ZXing.Net.Maui;
+using ZXing.Net.Maui.Controls;
 
 namespace BezorgApplicatie.Views;
 
@@ -50,6 +51,14 @@ public partial class DeliveryPage : ContentPage
     {
         base.OnAppearing();
         InitPage();
+        barcodeReader.IsDetecting = true;
+    }
+
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        barcodeReader.IsDetecting = false;
     }
 
     //private async Task LoadShift()
