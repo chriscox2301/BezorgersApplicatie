@@ -2,6 +2,8 @@
 using BezorgApplicatie.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Plugin.LocalNotification;
+using ZXing.Net.Maui.Controls;
 
 namespace BezorgApplicatie
 {
@@ -12,11 +14,13 @@ namespace BezorgApplicatie
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseLocalNotification()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .UseBarcodeReader();
 
             builder.Services.AddDbContext<DataContext>(
                 options =>
@@ -27,6 +31,9 @@ namespace BezorgApplicatie
                 );
 
 #if DEBUG
+            
+            //builder.Services.AddTransient<Views.PackageListPage>();
+            builder.Services.AddTransient<Views.ProblemPage>();
             builder.Logging.AddDebug();
 #endif
             var app = builder.Build();

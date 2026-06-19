@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:BezorgApplicatie.Views"
+    xmlns:local="clr-namespace:BezorgApplicatie"
     Title="BezorgApplicatie">
 
     <TabBar>
@@ -15,17 +16,21 @@
         <ShellContent
             Icon="map.png"
             Title="Kaart"
-            ContentTemplate="{DataTemplate views:NewPage1}"
-            Route="NewPage1" />
+            ContentTemplate="{DataTemplate views:DeliveryPage}"
+            Route="DeliveryPage" />
+        <ShellContent
+            Title="Scannen"
+            ContentTemplate="{DataTemplate views:PakkettenInscannen}"
+            Route="PakkettenInscannen" />
         <ShellContent
             Icon="orders.png"
             Title="Orders"
-            ContentTemplate="{DataTemplate views:NewPage1}"
-            Route="NewPage1" />
+            ContentTemplate="{DataTemplate views:AllStopsPage}"
+            Route="AllStopsPage" />
         <ShellContent
             Icon="warning.png"
             Title="Schade"
-            ContentTemplate="{DataTemplate views:NewPage1}"
+            ContentTemplate="{DataTemplate views:VehicleDamagePage}"
             Route="NewPage1" />
     </TabBar>
 
