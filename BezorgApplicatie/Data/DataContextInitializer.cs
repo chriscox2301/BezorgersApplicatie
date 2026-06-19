@@ -22,43 +22,28 @@ namespace BezorgApplicatie.Data
             };
             context.Drivers.AddRange(drivers);
 
-            var vehicles = new Vehicle[] {
-                new Vehicle {Id = 1, LicensePlate = "AA-392-B" },
-                new Vehicle {Id = 2, LicensePlate = "BB-333-C" },
-                new Vehicle {Id = 3, LicensePlate = "DD-322-D" },
-                new Vehicle {Id = 4, LicensePlate = "VD-421-E" }
-            };
-            context.Vehicles.AddRange(vehicles);
-
-            var warehouses = new Warehouse[] {
-                new Warehouse {Location = "Maastricht" }, 
-                new Warehouse {Location = "Sittard" }
-            };
-
-            context.Warehouses.AddRange(warehouses); 
-            var loads = new Load[]
-                {
-                   new Load { Warehouse = warehouses[0] }  
-                };
-
-            context.Loads.AddRange(loads);
-
-        
-
-
-            var shift = new Shift[]
-            {
-                new Shift {StartTime = DateTime.Parse("2026-08-16 9:30:00"), EndTime = DateTime.Parse("2026-08-16 16:30:00"), Driver = drivers[0], Vehicle = vehicles[1],  Warehouse = warehouses[1],  Load = loads[0] },
-                new Shift {StartTime = DateTime.Parse("2026-08-18 9:30:00"), EndTime = DateTime.Parse("2026-08-18 16:30:00"), Driver = drivers[0], Vehicle = vehicles[3], Warehouse = warehouses[0],  Load = loads[0] }
-            };
-            context.Shifts.AddRange(shift);
+            var warehouse = new Warehouse { Location = "Amsterdam" };
+            context.Warehouses.Add(warehouse);
+            var cart = new Cart { Warehouse = warehouse, VehicleZone = "A1" };
+            context.Carts.Add(cart);
 
             var orders = new Order[]
             {
-                 new Order {Date = DateTime.Now,  Status = "Nieuw", Address = "Maastricht", Shift = shift[0]  }
+                new Order { Date = DateTime.Now, Status = "Open", Address = "Damrak 1, Amsterdam" },
+                new Order { Date = DateTime.Now, Status = "Open", Address = "Kalverstraat 5, Amsterdam" },
+                new Order { Date = DateTime.Now, Status = "Open", Address = "Nieuwendijk 10, Amsterdam" }
             };
-
             context.Orders.AddRange(orders);
+
+            var packages = new Package[]
+            {
+                new Package { Weight = 1.5, Barcode = "PKG001", Order = orders[0], Cart = cart, HasIssue = false },
+                new Package { Weight = 2.3, Barcode = "PKG002", Order = orders[1], Cart = cart, HasIssue = false },
+                new Package { Weight = 0.8, Barcode = "PKG003", Order = orders[2], Cart = cart, HasIssue = false }
+            };
+            context.Packages.AddRange(packages);
+
+            context.SaveChanges();
 
             context.Database.EnsureCreated();
 

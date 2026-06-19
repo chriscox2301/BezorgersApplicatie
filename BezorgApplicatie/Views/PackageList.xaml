@@ -1,0 +1,39 @@
+<!--<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BezorgApplicatie.Views.PackageListPage"
+             Title="Probleem melden">
+
+    <VerticalStackLayout Padding="16" Spacing="12">
+
+        <Label Text="Barcode invoeren:" FontAttributes="Bold"/>
+        <HorizontalStackLayout Spacing="8">
+            <Entry x:Name="BarcodeEntry"
+                   Placeholder="Bijv. ABC123"
+                   WidthRequest="250"/>
+            <Button Text="Zoeken" Clicked="OnZoekenClicked"/>
+        </HorizontalStackLayout>
+
+        <Label Text="Pakketten in lading:" FontAttributes="Bold" Margin="0,8,0,0"/>
+
+        <CollectionView x:Name="PakkettenLijst"
+                        SelectionMode="Single"
+                        SelectionChanged="OnPakketGekozen">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <HorizontalStackLayout Padding="8" Spacing="12">
+                        <Label Text="{Binding Barcode}"
+                               VerticalOptions="Center"
+                               FontSize="16"/>
+                        <Label Text="⚠️"
+                               IsVisible="{Binding HasIssue}"
+                               TextColor="Red"
+                               VerticalOptions="Center"
+                               FontSize="18"/>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>-->

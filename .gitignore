@@ -6,7 +6,7 @@
 ## has more thorough IDE-specific entries.
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/Dotnet.gitignore
-
+**/DataContextInitializer.cs
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -57,3 +57,4 @@ TestResult.xml
 nunit-*.xml
 /.vs
 /BezorgApplicatie/.vs
+/BezorgApplicatie/BezorgApplicatie.csproj.user

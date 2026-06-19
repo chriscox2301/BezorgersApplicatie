@@ -73,6 +73,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\ProblemPage.xaml.cs">
+	    <DependentUpon>ProblemPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\PackageList.xaml.cs">
+	    <DependentUpon>PackageList.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\DeliveryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProblemPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PackageList.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\NewPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -18,7 +18,11 @@ namespace BezorgApplicatie
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .UseBarcodeReader();
+
+            builder.Services.AddTransient<Views.PackageListPage>();
+            builder.Services.AddTransient<Views.ProblemPage>();
 
             builder.Services.AddDbContext<DataContext>(
                 options =>
