@@ -64,6 +64,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
 		<PackageReference Include="Plugin.LocalNotification" Version="10.1.8" />
+		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.5.2" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -76,9 +77,6 @@
 	  <Compile Update="Views\ProblemPage.xaml.cs">
 	    <DependentUpon>ProblemPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\PackageList.xaml.cs">
-	    <DependentUpon>PackageList.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -86,9 +84,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ProblemPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\PackageList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\NewPage1.xaml">
