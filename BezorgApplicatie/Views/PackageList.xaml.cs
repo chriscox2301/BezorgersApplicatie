@@ -7,7 +7,7 @@ namespace BezorgApplicatie.Views
     public partial class PackageListPage : ContentPage
     {
         private readonly DataContext _context;
-        private List<Package> _allPackages;
+        private List<Package> _allePakketten;
 
         public PackageListPage(DataContext context)
         {
@@ -18,8 +18,8 @@ namespace BezorgApplicatie.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            _allPackages = await _context.Packages.ToListAsync();
-            PackageList.ItemsSource = _allPackages;
+            _allePakketten = await _context.Packages.ToListAsync();
+            PakkettenLijst.ItemsSource = _allePakketten;
         }
 
         private void OnZoekenClicked(object sender, EventArgs e)
@@ -27,14 +27,14 @@ namespace BezorgApplicatie.Views
             var zoekterm = BarcodeEntry.Text?.Trim();
             if (string.IsNullOrEmpty(zoekterm))
             {
-                PackageList.ItemsSource = _allPackages;
+                PakkettenLijst.ItemsSource = _allePakketten;
                 return;
             }
 
-            var gefilterd = _allPackages
+            var gefilterd = _allePakketten
                 .Where(p => p.Barcode != null && p.Barcode.Contains(zoekterm, StringComparison.OrdinalIgnoreCase))
                 .ToList();
-            PackageList.ItemsSource = gefilterd;
+            PakkettenLijst.ItemsSource = gefilterd;
         }
 
         private async void OnPakketGekozen(object sender, SelectionChangedEventArgs e)
@@ -42,9 +42,9 @@ namespace BezorgApplicatie.Views
             if (e.CurrentSelection.FirstOrDefault() is not Package gekozenPakket)
                 return;
 
-            PackageList.SelectedItem = null;
+            PakkettenLijst.SelectedItem = null;
 
-            await Shell.Current.GoToAsync($"{nameof(ProbleemMeldenPage)}?pakketId={gekozenPakket.Id}");
+            await Shell.Current.GoToAsync($"{nameof(ProblemPage)}?pakketId={gekozenPakket.Id}");
         }
     }
 }

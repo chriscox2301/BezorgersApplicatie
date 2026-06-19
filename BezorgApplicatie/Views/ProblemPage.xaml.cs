@@ -4,14 +4,14 @@ using PackageIssueModel = BezorgApplicatie.Models.PackageIssue;
 namespace BezorgApplicatie.Views
 {
     [QueryProperty(nameof(PakketId), "pakketId")]
-    public partial class ProbleemMeldenPage : ContentPage
+    public partial class ProblemPage : ContentPage
     {
         private readonly DataContext _context;
         private BezorgApplicatie.Models.Package _pakket;
 
         public int PakketId { get; set; }
 
-        public ProbleemMeldenPage(DataContext context)
+        public ProblemPage(DataContext context)
         {
             InitializeComponent();
             _context = context;

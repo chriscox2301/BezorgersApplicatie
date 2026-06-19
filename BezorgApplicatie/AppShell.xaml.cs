@@ -5,7 +5,7 @@
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(Views.ProbleemMeldenPage), typeof(Views.ProbleemMeldenPage));
+            Routing.RegisterRoute(nameof(Views.ProblemPage), typeof(Views.ProblemPage));
         }
     }
 }

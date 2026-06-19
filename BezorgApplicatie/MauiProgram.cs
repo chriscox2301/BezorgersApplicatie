@@ -20,8 +20,8 @@ namespace BezorgApplicatie
                 })
                 .UseBarcodeReader();
 
-            builder.Services.AddTransient<Views.PakketLijstPage>();
-            builder.Services.AddTransient<Views.ProbleemMeldenPage>();
+            builder.Services.AddTransient<Views.PackageListPage>();
+            builder.Services.AddTransient<Views.ProblemPage>();
 
             builder.Services.AddDbContext<DataContext>(
                 options =>
