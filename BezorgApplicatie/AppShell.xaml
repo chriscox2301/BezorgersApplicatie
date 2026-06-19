@@ -26,7 +26,7 @@
         <ShellContent
             Icon="warning.png"
             Title="Probleem"
-            ContentTemplate="{DataTemplate views:PackageListPage}"
+            ContentTemplate="{DataTemplate views:NewPage1}"
             Route="PackageListPage" />
     </TabBar>
 
