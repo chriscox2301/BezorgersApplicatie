@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             xmlns:local="clr-namespace:BezorgApplicatie.Views"
              x:Class="BezorgApplicatie.Views.PakkettenInscannen"
              Title="PakkettenInscannen">
 
@@ -31,7 +32,7 @@
                 Stroke="Black"
                 Padding="10">
             <Label
-                Text="Zone: D"
+                Text="{Binding CurrentZone, StringFormat='Zone: {0}'}"
                 FontSize="18" />
         </Border>
 
@@ -42,7 +43,7 @@
                 Stroke="Black"
                 Padding="10">
             <Label
-                Text="0/5"
+                Text="{Binding CounterDisplay}"
                 FontSize="18"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"/>
@@ -56,22 +57,31 @@
                         x:Name="PakketListView"
                         ItemsSource="{Binding ScannedBarcodes}">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="x:String">
+                <DataTemplate x:DataType="local:ScannedPackageViewModel">
                     <StackLayout Orientation="Horizontal"
                                  Spacing="15"
-                                 Margin="0 20 8 0">
+                                 Margin="0,20,8,0">
                         <Label BackgroundColor="White"
                                WidthRequest="30"
                                HeightRequest="30"
-                               Text="{Binding .}"
+                               Text="{Binding Id}"
                                TextColor="Red"
                                FontSize="8"
                                VerticalOptions="Center"/>
 
-                        <Label Text="{Binding .}"
-                               FontSize="20"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Start" />
+                        <StackLayout Orientation="Vertical"
+                                     Spacing="2">
+                            <Label Text="{Binding BarcodeDisplay}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                            <Label Text="{Binding WeightDisplay}"
+                                   FontSize="12"
+                                   TextColor="Gray"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                        </StackLayout>
 
                         <Button ImageSource="warning.png"
                             HeightRequest="15"
@@ -80,7 +90,8 @@
                             TranslationX="77"
                             HorizontalOptions="Start"
                             BackgroundColor="Goldenrod"
-                            Clicked="ProbleemMelden">
+                            Clicked="ProbleemMelden"
+                            CommandParameter="{Binding .}">
                         </Button>
 
 
