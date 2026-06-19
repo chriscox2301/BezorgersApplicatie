@@ -95,22 +95,27 @@
 
         <Button Grid.Row="5"
                 Grid.Column="0"
+                x:Name="BezorgdBtn"
                 HeightRequest="60"
                 WidthRequest="150"
-                BackgroundColor="Blue"
+                BackgroundColor="Grey"
                 Text="Bezorgd"
                 TextColor="White"
                 FontAttributes="Bold"
+                Clicked="BezorgdBtn_Clicked"
+                IsEnabled="False"
                 />
 
         <Button Grid.Row="5"
                 Grid.Column="1"
+                x:Name="AndersBtn"
                 HeightRequest="60"
                 WidthRequest="150"
-                BackgroundColor="Orange"
+                BackgroundColor="Grey"
                 Text="Anders"
                 FontAttributes="Bold"
-TextColor="White"
+                TextColor="White"
+                IsEnabled="False"
                 />
 
     </Grid>
