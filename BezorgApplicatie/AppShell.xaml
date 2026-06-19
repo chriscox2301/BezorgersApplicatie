@@ -25,9 +25,9 @@
             Route="NewPage1" />
         <ShellContent
             Icon="warning.png"
-            Title="Probleem"
-            ContentTemplate="{DataTemplate views:NewPage1}"
-            Route="PackageListPage" />
+            Title="Schade"
+            ContentTemplate="{DataTemplate views:VehicleDamagePage}"
+            Route="NewPage1" />
     </TabBar>
 
 </Shell>

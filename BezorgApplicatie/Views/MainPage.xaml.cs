@@ -1,24 +1,42 @@
-﻿namespace BezorgApplicatie.Views
+﻿using BezorgApplicatie.Data;
+using BezorgApplicatie.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace BezorgApplicatie.Views;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    private readonly DataContext _context;
+
+    public Shift? Shift { get; set; }
+  
+    public MainPage(DataContext context)
     {
-        int count = 0;
+        InitializeComponent();
+        _context = context;
+        BindingContext = this;
+    }
 
-        public MainPage()
-        {
-            InitializeComponent();
-        }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        
 
-        private void OnCounterClicked(object? sender, EventArgs e)
-        {
-            count++;
+         Shift = await _context.Shifts
+            .Include(s => s.Warehouse)
+            .Include(s => s.Vehicle)
+            .Include(s => s.Orders)
+            .Where(s => s.StartTime >= DateTime.Now)
+            .OrderBy(s => s.StartTime)
+            .FirstOrDefaultAsync();
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+      
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
+
+      
+
+        OnPropertyChanged(nameof(Shift)); 
+        
+
     }
 }

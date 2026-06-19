@@ -18,7 +18,7 @@ namespace BezorgApplicatie.Data
             var drivers = new Driver[]
             {
                 new Driver {Name = "Piet"},
-                new Driver {Name = "Henk"}
+              
             };
             context.Drivers.AddRange(drivers);
 
@@ -46,6 +46,10 @@ namespace BezorgApplicatie.Data
             context.SaveChanges();
 
             context.Database.EnsureCreated();
+
+            context.SaveChanges(); 
+
+
         }
     }
 }
