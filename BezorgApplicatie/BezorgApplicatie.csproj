@@ -68,28 +68,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\VehicleDamagePage.xaml.cs">
-	    <DependentUpon>VehicleDamagePage.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Views\ProblemPage.xaml.cs">
-	    <DependentUpon>ProblemPage.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="Views\DeliveryPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\ProblemPage.xaml">
+	  <MauiXaml Update="Views\AllStopsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\NewPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\VehicleDamagePage.xaml">
+	  <MauiXaml Update="Views\StopDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

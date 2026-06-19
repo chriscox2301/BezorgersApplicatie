@@ -2,8 +2,6 @@
 using BezorgApplicatie.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Plugin.LocalNotification;
-using ZXing.Net.Maui;
 using ZXing.Net.Maui.Controls;
 
 namespace BezorgApplicatie
@@ -23,9 +21,6 @@ namespace BezorgApplicatie
                 })
                 .UseBarcodeReader();
 
-            //builder.Services.AddTransient<Views.PackageListPage>();
-            builder.Services.AddTransient<Views.ProblemPage>();
-
             builder.Services.AddDbContext<DataContext>(
                 options =>
                 {
@@ -35,6 +30,9 @@ namespace BezorgApplicatie
                 );
 
 #if DEBUG
+            
+            //builder.Services.AddTransient<Views.PackageListPage>();
+            builder.Services.AddTransient<Views.ProblemPage>();
             builder.Logging.AddDebug();
 #endif
             var app = builder.Build();
