@@ -19,6 +19,10 @@
             ContentTemplate="{DataTemplate views:DeliveryPage}"
             Route="DeliveryPage" />
         <ShellContent
+            Title="Scannen"
+            ContentTemplate="{DataTemplate views:PakkettenInscannen}"
+            Route="PakkettenInscannen" />
+        <ShellContent
             Icon="orders.png"
             Title="Orders"
             ContentTemplate="{DataTemplate views:AllStopsPage}"
