@@ -1,3 +1,4 @@
+using SQLite;
 using System.Collections.ObjectModel;
 using System.Data;
 using ZXing;
@@ -17,8 +18,9 @@ public partial class PakkettenInscannen : ContentPage
 
         barcodeReader.Options = new BarcodeReaderOptions
         {
-            Formats = ZXing.Net.Maui.BarcodeFormat.Code39,
-            AutoRotate = true
+            Formats = BarcodeFormats.All,
+            AutoRotate = true,
+            TryHarder = true
         };
 
         barcodeReader.BarcodesDetected += OnBarcodesDetected;
@@ -54,5 +56,20 @@ public partial class PakkettenInscannen : ContentPage
 
         public static string DatabasePath =>
             Path.Combine(FileSystem.AppDataDirectory, DatabaseFilename);
+    }
+
+    public void ProbleemMelden(object sender, EventArgs e)
+    {
+        return;
+    }
+
+    public void VolgendeZone(object sender, EventArgs e)
+    {
+        return;
+    }
+
+    public void VorigeZone(object sender, EventArgs e)
+    {
+        return;
     }
 }
