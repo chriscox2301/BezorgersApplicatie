@@ -14,5 +14,7 @@ namespace BezorgApplicatie.Models
         public string Status { get; set; }
         public string Address { get; set; }
 
+        public int ShiftId { get; set; }
+        public Shift Shift { get; set; }
     }
 }
