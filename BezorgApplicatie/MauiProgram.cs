@@ -28,6 +28,9 @@ namespace BezorgApplicatie
                 }
                 );
 
+            // Registreer de pagina's
+            builder.Services.AddSingleton<BezorgApplicatie.Views.PakkettenInscannen>();
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

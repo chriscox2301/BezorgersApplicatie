@@ -1,4 +1,3 @@
-using SQLite;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.ComponentModel;
@@ -65,9 +64,10 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public PakkettenInscannen()
+        public PakkettenInscannen(DataContext dataContext)
         {
             InitializeComponent();
+            _dataContext = dataContext;
             scannedBarcodes = new ObservableCollection<ScannedPackageViewModel>();
             BindingContext = this;
 
@@ -86,7 +86,6 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
             base.OnAppearing();
             try
             {
-                _dataContext = ServiceHelper.GetService<DataContext>();
                 if (_dataContext == null)
                 {
                     await DisplayAlert("Error", "Database context niet geïnitialiseerd", "OK");
@@ -143,22 +142,6 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
     {
         _scannedCount = scannedBarcodes.Count;
         CounterDisplay = $"{_scannedCount}/{_maxPackagesPerZone}";
-    }
-
-    public static class Constants
-    {
-        public const string DatabaseFilename = "MatrixIncBezorger.db";
-
-        public const SQLite.SQLiteOpenFlags Flags =
-            // open the database in read/write mode
-            SQLite.SQLiteOpenFlags.ReadWrite |
-            // create the database if it doesn't exist
-            SQLite.SQLiteOpenFlags.Create |
-            // enable multi-threaded database access
-            SQLite.SQLiteOpenFlags.SharedCache;
-
-        public static string DatabasePath =>
-            Path.Combine(FileSystem.AppDataDirectory, DatabaseFilename);
     }
 
     public async void ProbleemMelden(object sender, EventArgs e)
