@@ -86,14 +86,28 @@ public partial class VehicleDamagePage : ContentPage
         _currentShift.VehicleId = _replacementVehicle.Id;
         _context.Shifts.Update(_currentShift);
 
-    
-        var damage = new VehicleDamage
+        double latitude = 0;
+        double longitude = 0;
+
+
+        if (pickerLocation.SelectedItem?.ToString() == "Onderweg")
+        {
+            Location locationBus = await Geolocation.Default.GetLastKnownLocationAsync();
+            latitude = locationBus.Latitude;
+            longitude = locationBus.Longitude; 
+
+        }
+
+
+            var damage = new VehicleDamage
         {
             VehicleId = originalVehicleId,   
             ShiftId = _currentShift.Id,
             Description = txtDescription.Text,
             Location = pickerLocation.SelectedItem?.ToString(),
-            Time = DateTime.Now
+            Time = DateTime.Now,
+            Latitude = latitude,
+            Longitude = longitude
         };
 
         _context.VehicleDamages.Add(damage);
@@ -109,23 +123,25 @@ public partial class VehicleDamagePage : ContentPage
             "Depot" => $" Pak bus {_replacementVehicle.Id} in het depot",
             _ => $"Bus {_replacementVehicle.Id} vervangen"
         };
-        // Windows machine werkt niet door dit stuk hieronder. gebruik android local device of emulator 
-        var request = new NotificationRequest
-        {
-            NotificationId = 1337,
-            Title = "Nieuwe Bus",
-            Subtitle = "Bus Update",
-            Description = message,
 
-            Schedule = new NotificationRequestSchedule
-            {
-                NotifyTime = DateTime.Now.AddSeconds(5)
-            },
+
+        //// Windows machine werkt niet door dit stuk hieronder. gebruik android local device of emulator 
+        //var request = new NotificationRequest
+        //{
+        //    NotificationId = 1337,
+        //    Title = "Nieuwe Bus",
+        //    Subtitle = "Bus Update",
+        //    Description = message,
+
+        //    Schedule = new NotificationRequestSchedule
+        //    {
+        //        NotifyTime = DateTime.Now.AddSeconds(5)
+        ////    },
 
  
 
-        }; 
-        LocalNotificationCenter.Current.Show(request);
+        //}; 
+        //LocalNotificationCenter.Current.Show(request);
 
         txtDescription.Text = string.Empty;
         pickerLocation.SelectedItem = null;

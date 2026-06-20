@@ -16,6 +16,8 @@ namespace BezorgApplicatie.Models
         public Shift Shift { get; set; }
         public string Location { get; set; }
         public DateTime Time { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
     }
 }
