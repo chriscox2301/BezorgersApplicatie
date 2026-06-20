@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="BezorgApplicatie.Views.AllStopsPage"
+             Title="Stops">
+    <ScrollView>
+    <Grid RowDefinitions="Auto, Auto, Auto,*"
+          RowSpacing="10"
+          Padding="10">
+        
+        <HorizontalStackLayout Grid.Row="0">
+        
+            <SearchBar x:Name="Zoekbalk" Placeholder="Zoeken..." WidthRequest="325" TextChanged="ZoektermIngevuld"/>
+
+            <Button Text="📷" Clicked="ScanButton_Clicked"/>
+
+        </HorizontalStackLayout>
+        
+        <Border Grid.Row="1" x:Name="CameraVenster" IsVisible="False">
+
+            <zxing:CameraBarcodeReaderView
+                x:Name="barcodeReader"
+                BarcodesDetected="barcodeReader_BarcodesDetected" />
+
+        </Border>
+
+        <!-- "Tabs" -->
+        <HorizontalStackLayout Grid.Row="2">
+        
+                <Button Text="Te Doen" Clicked="ToDoClicked"/>
+                <Button Text="Afgerond" Clicked="CompletedClicked" />
+                <Button Text="Anders" Clicked="DifferentClicked"/>
+         
+        </HorizontalStackLayout>
+
+
+        <CollectionView x:Name="StopsList" SelectionMode="Single" SelectionChanged="StopSelected" Grid.Row="3">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Border StrokeThickness="2" Stroke="Black" StrokeShape="10">
+                        <VerticalStackLayout>
+                            <Grid RowSpacing="10" RowDefinitions="Auto, Auto, Auto, Auto" Padding="10">
+                                <Label Text="{Binding Id, StringFormat='#{0}'}" Grid.Row="0"/>
+                                    <Label Text="{Binding Status}" HorizontalOptions="End"/>
+                                    <Label Text="{Binding Address}" Grid.Row="1" />
+                                <Label Text="{Binding Packages.Count, StringFormat='📦: {0}'}" Grid.Row="2" />
+                                <Label Text=">" HorizontalOptions="End" Grid.Row="1"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+    </ScrollView>
+
+</ContentPage>

@@ -20,49 +20,49 @@ public class ScannedPackageViewModel
 }
 
 public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
+{
+    private ObservableCollection<ScannedPackageViewModel> scannedBarcodes;
+    private string selectedBarcode;
+    private DataContext _dataContext;
+    private int _scannedCount = 0;
+    private int _maxPackagesPerZone = 5;
+    private List<string> _zones = new() { "D", "C", "B", "A" };
+    private int _currentZoneIndex = 0;
+    private string _currentZone = "D";
+    private string _counterDisplay = "0/5";
+
+    public string CurrentZone
     {
-        private ObservableCollection<ScannedPackageViewModel> scannedBarcodes;
-        private string selectedBarcode;
-        private DataContext _dataContext;
-        private int _scannedCount = 0;
-        private int _maxPackagesPerZone = 5;
-        private List<string> _zones = new() { "D", "C", "B", "A" };
-        private int _currentZoneIndex = 0;
-        private string _currentZone = "D";
-        private string _counterDisplay = "0/5";
-
-        public string CurrentZone 
-        { 
-            get => _currentZone; 
-            set 
-            { 
-                if (_currentZone != value)
-                {
-                    _currentZone = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string CounterDisplay 
-        { 
-            get => _counterDisplay; 
-            set 
-            { 
-                if (_counterDisplay != value)
-                {
-                    _counterDisplay = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        get => _currentZone;
+        set
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (_currentZone != value)
+            {
+                _currentZone = value;
+                OnPropertyChanged();
+            }
         }
+    }
+
+    public string CounterDisplay
+    {
+        get => _counterDisplay;
+        set
+        {
+            if (_counterDisplay != value)
+            {
+                _counterDisplay = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 
         public PakkettenInscannen(DataContext dataContext)
         {
@@ -71,15 +71,15 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
             scannedBarcodes = new ObservableCollection<ScannedPackageViewModel>();
             BindingContext = this;
 
-            barcodeReader.Options = new BarcodeReaderOptions
-            {
-                Formats = BarcodeFormats.All,
-                AutoRotate = true,
-                TryHarder = true
-            };
+        barcodeReader.Options = new BarcodeReaderOptions
+        {
+            Formats = BarcodeFormats.All,
+            AutoRotate = true,
+            TryHarder = true
+        };
 
-            barcodeReader.BarcodesDetected += OnBarcodesDetected;
-        }
+        barcodeReader.BarcodesDetected += OnBarcodesDetected;
+    }
 
         protected override async void OnAppearing()
         {
@@ -88,7 +88,7 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
             {
                 if (_dataContext == null)
                 {
-                    await DisplayAlert("Error", "Database context niet geïnitialiseerd", "OK");
+                    await DisplayAlert("Error", "Database context niet geÃ¯nitialiseerd", "OK");
                 }
             }
             catch (Exception ex)
@@ -97,46 +97,46 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
             }
         }
 
-        public ObservableCollection<ScannedPackageViewModel> ScannedBarcodes => scannedBarcodes;
+    public ObservableCollection<ScannedPackageViewModel> ScannedBarcodes => scannedBarcodes;
 
     public void OnBarcodesDetected(object sender, BarcodeDetectionEventArgs e)
+    {
+        MainThread.BeginInvokeOnMainThread(async () =>
         {
-            MainThread.BeginInvokeOnMainThread(async () =>
+            if (_dataContext == null)
             {
-                if (_dataContext == null)
-                {
-                    await DisplayAlert("Error", "Database context is nog niet geïnitialiseerd", "OK");
-                    return;
-                }
+                await DisplayAlert("Error", "Database context is nog niet geï¿½nitialiseerd", "OK");
+                return;
+            }
 
-                foreach (var barcode in e.Results)
+            foreach (var barcode in e.Results)
+            {
+                if (!scannedBarcodes.Any(p => p.BarcodeDisplay == barcode.Value))
                 {
-                    if (!scannedBarcodes.Any(p => p.BarcodeDisplay == barcode.Value))
+                    try
                     {
-                        try
-                        {
-                            var package = await _dataContext.Packages
-                                .AsNoTracking()
-                                .FirstOrDefaultAsync(p => p.Barcode == barcode.Value);
+                        var package = await _dataContext.Packages
+                            .AsNoTracking()
+                            .FirstOrDefaultAsync(p => p.Barcode == barcode.Value);
 
-                            if (package != null)
-                            {
-                                scannedBarcodes.Add(new ScannedPackageViewModel { Package = package });
-                                UpdateCounter();
-                            }
-                            else
-                            {
-                                await DisplayAlert("Info", $"Package met barcode {barcode.Value} niet gevonden in database", "OK");
-                            }
-                        }
-                        catch (Exception ex)
+                        if (package != null)
                         {
-                            await DisplayAlert("Error", $"Database error: {ex.Message}\n\nStackTrace: {ex.InnerException?.Message}", "OK");
+                            scannedBarcodes.Add(new ScannedPackageViewModel { Package = package });
+                            UpdateCounter();
+                        }
+                        else
+                        {
+                            await DisplayAlert("Info", $"Package met barcode {barcode.Value} niet gevonden in database", "OK");
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        await DisplayAlert("Error", $"Database error: {ex.Message}\n\nStackTrace: {ex.InnerException?.Message}", "OK");
+                    }
                 }
-            });
-        }
+            }
+        });
+    }
 
     private void UpdateCounter()
     {
