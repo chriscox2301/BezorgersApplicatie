@@ -124,8 +124,9 @@ public partial class VehicleDamagePage : ContentPage
             _ => $"Bus {_replacementVehicle.Id} vervangen"
         };
 
+        await DisplayAlert("Melding", message, "OK"); 
 
-        //// Windows machine werkt niet door dit stuk hieronder. gebruik android local device of emulator 
+        //// Pushmeldingen: Deze is na het mergen kapot gegaan en hebben we ook niet meer werkend  gekregen. 
         //var request = new NotificationRequest
         //{
         //    NotificationId = 1337,
@@ -138,7 +139,7 @@ public partial class VehicleDamagePage : ContentPage
         //        NotifyTime = DateTime.Now.AddSeconds(5)
         ////    },
 
- 
+
 
         //}; 
         //LocalNotificationCenter.Current.Show(request);
