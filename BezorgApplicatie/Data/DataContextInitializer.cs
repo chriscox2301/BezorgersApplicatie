@@ -50,9 +50,12 @@ namespace BezorgApplicatie.Data
 
             var packages = new Package[]
             {
-                new Package { Weight = 1.5, Barcode = "PKG001", Order = orders[0], Cart = cart, HasIssue = false },
-                new Package { Weight = 2.3, Barcode = "PKG002", Order = orders[1], Cart = cart, HasIssue = false },
-                new Package { Weight = 0.8, Barcode = "PKG003", Order = orders[2], Cart = cart, HasIssue = false }
+                new Package { Weight = 1.5, Number = 101, Barcode = "PKG001", Order = orders[0], Cart = cart, HasIssue = false },
+                new Package { Weight = 1.5, Number = 105, Barcode = "PKG002", Order = orders[0], Cart = cart, HasIssue = false },
+                new Package { Weight = 1.5, Number = 201, Barcode = "PKG003", Order = orders[0], Cart = cart, HasIssue = false },
+                new Package { Weight = 1.5, Number = 208, Barcode = "PKG004", Order = orders[0], Cart = cart, HasIssue = false },
+                new Package { Weight = 2.3, Number = 399, Barcode = "PKG005", Order = orders[1], Cart = cart, HasIssue = false },
+                new Package { Weight = 0.8, Number = 391, Barcode = "PKG006", Order = orders[2], Cart = cart, HasIssue = false }
             };
             context.Packages.AddRange(packages);
 
