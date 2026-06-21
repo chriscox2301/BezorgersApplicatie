@@ -1,4 +1,3 @@
-using SQLite;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.ComponentModel;
@@ -65,11 +64,12 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public PakkettenInscannen()
-    {
-        InitializeComponent();
-        scannedBarcodes = new ObservableCollection<ScannedPackageViewModel>();
-        BindingContext = this;
+        public PakkettenInscannen(DataContext dataContext)
+        {
+            InitializeComponent();
+            _dataContext = dataContext;
+            scannedBarcodes = new ObservableCollection<ScannedPackageViewModel>();
+            BindingContext = this;
 
         barcodeReader.Options = new BarcodeReaderOptions
         {
@@ -81,22 +81,21 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
         barcodeReader.BarcodesDetected += OnBarcodesDetected;
     }
 
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        try
+        protected override async void OnAppearing()
         {
-            _dataContext = ServiceHelper.GetService<DataContext>();
-            if (_dataContext == null)
+            base.OnAppearing();
+            try
             {
-                await DisplayAlert("Error", "Database context niet ge�nitialiseerd", "OK");
+                if (_dataContext == null)
+                {
+                    await DisplayAlert("Error", "Database context niet geïnitialiseerd", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to initialize database: {ex.Message}", "OK");
             }
         }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Error", $"Failed to initialize database: {ex.Message}", "OK");
-        }
-    }
 
     public ObservableCollection<ScannedPackageViewModel> ScannedBarcodes => scannedBarcodes;
 
@@ -143,22 +142,6 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
     {
         _scannedCount = scannedBarcodes.Count;
         CounterDisplay = $"{_scannedCount}/{_maxPackagesPerZone}";
-    }
-
-    public static class Constants
-    {
-        public const string DatabaseFilename = "MatrixIncBezorger.db";
-
-        public const SQLite.SQLiteOpenFlags Flags =
-            // open the database in read/write mode
-            SQLite.SQLiteOpenFlags.ReadWrite |
-            // create the database if it doesn't exist
-            SQLite.SQLiteOpenFlags.Create |
-            // enable multi-threaded database access
-            SQLite.SQLiteOpenFlags.SharedCache;
-
-        public static string DatabasePath =>
-            Path.Combine(FileSystem.AppDataDirectory, DatabaseFilename);
     }
 
     public async void ProbleemMelden(object sender, EventArgs e)
