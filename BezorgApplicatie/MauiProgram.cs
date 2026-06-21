@@ -1,7 +1,9 @@
 ﻿using BezorgApplicatie.Data;
 using BezorgApplicatie.Models;
+using Java.Lang.Annotation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Handlers;
 using Plugin.LocalNotification;
 using ZXing.Net.Maui.Controls;
 
@@ -36,6 +38,14 @@ namespace BezorgApplicatie
             builder.Services.AddTransient<Views.ProblemPage>();
             builder.Logging.AddDebug();
 #endif
+
+#if ANDROID
+            PickerHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+            {
+                handler.PlatformView.Background = null;
+            });
+#endif
+
             var app = builder.Build();
 
             using (var scope = app.Services.CreateScope())

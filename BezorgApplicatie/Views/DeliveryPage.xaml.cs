@@ -172,9 +172,9 @@ public partial class DeliveryPage : ContentPage
         {
             FeedbackLabel.TextColor = Colors.Green;
             BezorgdBtn.IsEnabled = true;
-            BezorgdBtn.BackgroundColor = Colors.Blue;
-            AndersBtn.IsEnabled = true;
-            AndersBtn.BackgroundColor = Colors.Orange;
+            BezorgdBtn.BackgroundColor = Colors.Blue; 
+            AndersPicker.IsEnabled = true;
+            AndersBorder.BackgroundColor = Colors.Orange;
         }
         FeedbackLabel.Text = $"{current}/{total}";
     }
@@ -187,6 +187,36 @@ public partial class DeliveryPage : ContentPage
     private async void BezorgdBtn_Clicked(object sender, EventArgs e)
     {
         Order.Status = "Bezorgd";
+        await _dataContext.SaveChangesAsync();
+        await Shell.Current.GoToAsync("//MainPage");
+    }
+
+    private void OnAndersPickerChanged(object sender, EventArgs e)
+    {
+        var picker = sender as Picker;
+        var selectedItem = picker.SelectedItem?.ToString();
+
+        if (selectedItem == "Buren")
+        {
+            AndersPickerOption("Buren");
+        }
+        else if (selectedItem == "Pakketpunt")
+        {
+            AndersPickerOption("Pakketpunt");
+        }
+        else if (selectedItem == "Geweigerd")
+        {
+            AndersPickerOption("Geweigerd");
+        }
+        else if (selectedItem == "Anders")
+        {
+            AndersPickerOption("Anders");
+        }
+    }
+
+    private async void AndersPickerOption(string option)
+    {
+        Order.Status = option;
         await _dataContext.SaveChangesAsync();
         await Shell.Current.GoToAsync("//MainPage");
     }
