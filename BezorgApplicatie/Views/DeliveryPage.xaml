@@ -65,7 +65,7 @@
                                HorizontalOptions="Fill"
                                CornerRadius="5"
                                Padding="8">
-                        <Grid ColumnDefinitions=".15*, .40*, .20*, .15*">
+                        <Grid ColumnDefinitions=".05*, .40*, .15*, .25*">
                             <Label HorizontalTextAlignment="Center" 
                                        VerticalTextAlignment="Center" 
                                        FontAttributes="Bold"

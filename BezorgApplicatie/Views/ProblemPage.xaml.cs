@@ -53,6 +53,7 @@ namespace BezorgApplicatie.Views
             };
 
             _pakket.HasIssue = true;
+            _pakket.Status = "Probleem Gemeld";
 
             _context.PackageIssues.Add(issue);
             await _context.SaveChangesAsync();

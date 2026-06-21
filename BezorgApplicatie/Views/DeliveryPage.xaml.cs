@@ -194,7 +194,5 @@ public partial class DeliveryPage : ContentPage
 
 //TODO:
 //Handmatig invoeren
-//Probleem Melden
 //Bezorgd
 //Anders
-//meer package meer orders
