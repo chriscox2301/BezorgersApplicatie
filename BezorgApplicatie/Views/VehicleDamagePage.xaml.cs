@@ -1,8 +1,7 @@
 using BezorgApplicatie.Data;
 using BezorgApplicatie.Models;
 using Microsoft.EntityFrameworkCore;
-using Plugin.LocalNotification;
-using Plugin.LocalNotification.AndroidOption;
+
 
 namespace BezorgApplicatie.Views;
 
