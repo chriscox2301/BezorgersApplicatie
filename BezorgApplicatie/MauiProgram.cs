@@ -1,9 +1,9 @@
 ﻿using BezorgApplicatie.Data;
 using BezorgApplicatie.Models;
+using Java.Lang.Annotation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Handlers;
-using Plugin.LocalNotification;
 using ZXing.Net.Maui.Controls;
 
 namespace BezorgApplicatie
@@ -15,7 +15,6 @@ namespace BezorgApplicatie
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseLocalNotification()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
