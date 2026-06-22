@@ -29,7 +29,7 @@ public partial class AllStopsPage : ContentPage
         OrderStatus = "Onderweg";
         Filter();
 
-        Dispatcher.StartTimer(TimeSpan.FromMinutes(5), () =>
+        Dispatcher.StartTimer(TimeSpan.FromSeconds(5), () =>
         {
             MainThread.BeginInvokeOnMainThread(async () =>
             {
