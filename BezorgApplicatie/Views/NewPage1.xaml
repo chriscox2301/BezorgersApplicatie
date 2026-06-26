@@ -113,6 +113,7 @@
         <Button Grid.Row="7"
                 Grid.Column="3"
                 Grid.ColumnSpan="2"
+                x:Name="NextBtn"
                 Padding="5"
                 CornerRadius="25"
                 Text="Volgende Zone"

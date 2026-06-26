@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BezorgApplicatie.Views.RouteMap"
+             Title="RouteMap">
+    
+    
+    <Grid RowDefinitions=".08*, .54*, .08*, .30*"
+          ColumnDefinitions=".33*, .33*, .33*">
+
+        <Label Grid.Row="0"
+               Grid.ColumnSpan="3"
+               Text="Route"
+               FontAttributes="Bold"
+               FontSize="20"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               />
+
+        <Image Grid.Row="1"
+               Grid.ColumnSpan="3"
+               Source="routemap.png"
+               />
+
+        <Button Grid.Row="2"
+                Grid.Column="1"
+                Text="Bezorgen"
+                BackgroundColor="Blue"
+                TextColor="White"
+                Clicked="DeliverButton_Clicked"
+                />
+
+        <Frame  Grid.Row="3" 
+                Grid.ColumnSpan="3"  
+                BorderColor="Black"
+                BackgroundColor="White"
+                HeightRequest="65"
+                CornerRadius="10">
+            <Grid ColumnDefinitions=".15*, .30*, .25*">
+                <Label Text="{Binding Order.Id, StringFormat='#{0}'}" TextColor="Black" Grid.Column="0"/>
+                <Label Text="{Binding Order.Status}" TextColor="Black" HorizontalOptions="End" Grid.Column="2"/>
+                <Label Text="{Binding Order.Address}" TextColor="Black" Grid.Column="1" />
+            </Grid>
+        </Frame>
+
+    </Grid>
+
+
+</ContentPage>

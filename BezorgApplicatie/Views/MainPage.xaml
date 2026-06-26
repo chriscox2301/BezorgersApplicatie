@@ -17,45 +17,54 @@
                     StrokeShape="RoundRectangle 15"
                     Padding="20">
 
-            <Border.Shadow>
-            <Shadow Opacity="0.3"
+                <Border.Shadow>
+                    <Shadow Opacity="0.3"
                     Radius="10"
                     Offset="2,2" />
-            </Border.Shadow>
+                </Border.Shadow>
 
-            <VerticalStackLayout Spacing="12">
+                <VerticalStackLayout Spacing="12">
 
-            <Label Text="{Binding Shift.StartTime, StringFormat='Datum: {0:dd-MM-yyyy}'}"
+                    <Label Text="{Binding Shift.StartTime, StringFormat='Datum: {0:dd-MM-yyyy}'}"
                    FontSize="18"
                    FontAttributes="Bold"
                    TextColor="Black" />
 
-            <BoxView HeightRequest="1"
+                    <BoxView HeightRequest="1"
                      Color="LightGray" />
 
-            <Label Text="{Binding Shift.StartTime, StringFormat='Starttijd: {0:HH:mm}'}"
+                    <Label Text="{Binding Shift.StartTime, StringFormat='Starttijd: {0:HH:mm}'}"
                    FontSize="18"
                    TextColor="Black" />
 
-            <Label Text="{Binding Shift.EndTime, StringFormat='Eindtijd: {0:HH:mm}'}"
+                    <Label Text="{Binding Shift.EndTime, StringFormat='Eindtijd: {0:HH:mm}'}"
                    FontSize="16"
                    TextColor="Black" />
 
-            <Label Text="{Binding Shift.Warehouse.Location, StringFormat='Depot: {0}'}"
+                    <Label Text="{Binding Shift.Warehouse.Location, StringFormat='Depot: {0}'}"
                    FontSize="16"
                    TextColor="Black" />
 
-            <Label Text="{Binding Shift.Orders.Count, StringFormat='Aantal stops: {0}'}"
+                    <Label Text="{Binding Shift.Orders.Count, StringFormat='Aantal stops: {0}'}"
                    FontSize="16"
                    TextColor="Black" />
 
-            <Label Text="{Binding Shift.Vehicle.Id, StringFormat='Busnummer: {0}'}"
+                    <Label Text="{Binding Shift.Vehicle.Id, StringFormat='Busnummer: {0}'}"
                    FontSize="16"
                    TextColor="Black" />
 
                 </VerticalStackLayout>
 
             </Border>
+
+            <Button Grid.Row="2"
+                    Grid.Column="1"
+                    Text="Inladen"
+                    BackgroundColor="Blue"
+                    TextColor="White"
+                    Clicked="StartShiftButton_Clicked"
+                    />
+
         </VerticalStackLayout>
     </ScrollView>
 

@@ -17,7 +17,7 @@ public partial class DeliveryPage : ContentPage
 	public ObservableCollection<Package> Packages { get; set; }
 
 
-    public DeliveryPage(DataContext dataContext)
+    public DeliveryPage(DataContext dataContext, Order order)
 	{
         InitializeComponent();
 		barcodeReader.Options = new BarcodeReaderOptions
@@ -28,8 +28,8 @@ public partial class DeliveryPage : ContentPage
             TryHarder = true
 		};
 		_dataContext = dataContext;
-		//Shift = new Shift();
-		Order = new Order();
+        //Shift = new Shift();
+        Order = order;
 
 		Packages = new ObservableCollection<Package>();
         Packages.CollectionChanged += Packages_CollectionChanged;
@@ -41,7 +41,7 @@ public partial class DeliveryPage : ContentPage
 	private async void InitPage()
 	{
         //await LoadShift();
-        await LoadOrder();
+        //await LoadOrder();
         await LoadPackages();
         UpdateFeedbackLabel();
     }
@@ -188,7 +188,7 @@ public partial class DeliveryPage : ContentPage
     {
         Order.Status = "Bezorgd";
         await _dataContext.SaveChangesAsync();
-        await Shell.Current.GoToAsync("//MainPage");
+        await Shell.Current.GoToAsync("..");
     }
 
     private void OnAndersPickerChanged(object sender, EventArgs e)
@@ -218,7 +218,7 @@ public partial class DeliveryPage : ContentPage
     {
         Order.Status = option;
         await _dataContext.SaveChangesAsync();
-        await Shell.Current.GoToAsync("//MainPage");
+        await Shell.Current.GoToAsync("..");
     }
 }
 

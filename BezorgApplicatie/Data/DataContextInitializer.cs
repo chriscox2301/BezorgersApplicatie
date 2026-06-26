@@ -61,16 +61,13 @@ namespace BezorgApplicatie.Data
 
             var shift = new Shift[]
             {
-                new Shift { Orders = orders, Driver = drivers[0], StartTime = DateTime.Parse("2026-06-25 08:00:00"), EndTime = DateTime.Parse("2026-06-25 16:00:00"), Warehouse = warehouse, Vehicle = vehicles[0], Load = loads[0]}
+                new Shift { Orders = orders, Driver = drivers[0], StartTime = DateTime.Parse("2026-06-28 08:00:00"), EndTime = DateTime.Parse("2026-06-28 16:00:00"), Warehouse = warehouse, Vehicle = vehicles[0], Load = loads[0]}
             };
             context.Shifts.AddRange(shift);
-
-            context.SaveChanges();
 
             context.Database.EnsureCreated();
 
             context.SaveChanges(); 
-
 
         }
     }

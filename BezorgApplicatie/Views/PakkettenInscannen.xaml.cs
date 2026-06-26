@@ -25,11 +25,11 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
     private string selectedBarcode;
     private DataContext _dataContext;
     private int _scannedCount = 0;
-    private int _maxPackagesPerZone = 5;
+    private int _maxPackagesPerZone = 1;
     private List<string> _zones = new() { "D", "C", "B", "A" };
     private int _currentZoneIndex = 0;
     private string _currentZone = "D";
-    private string _counterDisplay = "0/5";
+    private string _counterDisplay = "0/1";
 
     public string CurrentZone
     {
@@ -165,12 +165,19 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
                 scannedBarcodes.Clear();
                 _scannedCount = 0;
                 UpdateCounter();
+                if(CurrentZone == "A")
+                {
+                    NextBtn.Text = "Start Shift";
+                    NextBtn.BackgroundColor = Colors.Blue;
+                    NextBtn.TextColor = Colors.White;
+                }
 
                 await DisplayAlert("Zone", $"Volgende zone: {CurrentZone}", "OK");
             }
             else
             {
                 await DisplayAlert("Info", "Alle zones zijn afgerond!", "OK");
+                await Shell.Current.GoToAsync("///RouteMap");
             }
         }
         else
