@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
 <Shell
     x:Class="BezorgApplicatie.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -19,6 +20,7 @@
             ContentTemplate="{DataTemplate views:RouteMap}"
             Route="RouteMap" />
         <ShellContent
+            Icon="barcodescanner.png"
             Title="Scannen"
             ContentTemplate="{DataTemplate views:PakkettenInscannen}"
             Route="PakkettenInscannen" />
