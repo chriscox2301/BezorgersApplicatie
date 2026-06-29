@@ -118,13 +118,14 @@ public partial class DeliveryPage : ContentPage
             if (matchedPackage != null)
             {
                 matchedPackage.Status = "Present";
-                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(50));
-                await DisplayAlert("Goed", $"Pakketnummer {matchedPackage.Number}", "Ok");
+                //Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(50));
+                //await DisplayAlert("Goed", $"Pakketnummer {matchedPackage.Number}", "Ok");
                 await _dataContext.SaveChangesAsync();
             }
             else
             {
-                await DisplayAlert("Fout", $"Dit pakket is niet in deze Order", "Ok");
+                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(200));
+                await DisplayAlert("Fout", $"Dit pakket is niet in deze order", "Ok");
             }
 
             await Task.Delay(3000);
