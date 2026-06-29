@@ -1,4 +1,4 @@
-﻿using BezorgApplicatie.Models;
+﻿  using BezorgApplicatie.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +61,7 @@ namespace BezorgApplicatie.Data
 
             var shift = new Shift[]
             {
-                new Shift { Orders = orders, Driver = drivers[0], StartTime = DateTime.Parse("2026-06-28 08:00:00"), EndTime = DateTime.Parse("2026-06-28 16:00:00"), Warehouse = warehouse, Vehicle = vehicles[0], Load = loads[0]}
+                new Shift { Orders = orders, Driver = drivers[0], StartTime = DateTime.Parse("2026-07-18 08:00:00"), EndTime = DateTime.Parse("2026-07-18 16:00:00"), Warehouse = warehouse, Vehicle = vehicles[0], Load = loads[0]}
             };
             context.Shifts.AddRange(shift);
 
