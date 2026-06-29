@@ -179,6 +179,32 @@ public partial class DeliveryPage : ContentPage
         }
         FeedbackLabel.Text = $"{current}/{total}";
     }
+    private async void OnManualClicked(object sender, EventArgs e)
+    {
+        Button button = (Button)sender;
+        Package package = (Package)button.BindingContext;
+
+        string result = await DisplayPromptAsync(
+        "Handmatige invoer",
+        $"Voer barcode in voor pakket {package.Number}:",
+        initialValue: "",
+        maxLength: 10,
+        keyboard: Keyboard.Text);
+
+        if (string.IsNullOrWhiteSpace(result))
+            return;
+
+        if (result == package.Barcode)
+        {
+            package.Status = "Present";
+            await _dataContext.SaveChangesAsync();
+        }
+        else
+        {
+            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(200));
+            await DisplayAlert("Fout", "Barcode komt niet overeen", "OK");
+        }
+    }
     private async void OnProblemClicked(object sender, EventArgs e)
     {
         if (sender is not Button button || button.BindingContext is not Package package)

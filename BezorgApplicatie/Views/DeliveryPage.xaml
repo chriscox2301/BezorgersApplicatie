@@ -79,31 +79,36 @@
                                 <Setter Property="BackgroundColor" Value="IndianRed"/>
                             </DataTrigger>
                         </Frame.Triggers>
-                        
-                        <Grid ColumnDefinitions=".07*, .43*, .15*, .20*">
-                            <Label     HorizontalTextAlignment="Center" 
-                                       VerticalTextAlignment="Center" 
-                                       FontAttributes="Bold"
-                                       Grid.Column="0" 
-                                       Text="{Binding Number}" 
-                                       TextColor="Black"/>
+
+                        <Grid ColumnDefinitions=".07*, .30*, .15*, .15*, .20*">
                             <Label HorizontalTextAlignment="Center" 
-                                       VerticalTextAlignment="Center" 
-                                       FontAttributes="Bold"
-                                       Grid.Column="1" 
-                                       Text="{Binding Barcode}" 
-                                       TextColor="Black"/>
-                            <Button     Grid.Column="2"
-                                        ImageSource="warning.png"
-                                        Clicked="OnProblemClicked"
-                                        WidthRequest="65"
-                                        BackgroundColor="Goldenrod"/>
+                                   VerticalTextAlignment="Center" 
+                                   FontAttributes="Bold"
+                                   Grid.Column="0" 
+                                   Text="{Binding Number}" 
+                                   TextColor="Black"/>
                             <Label HorizontalTextAlignment="Center" 
-                                       VerticalTextAlignment="Center" 
-                                       FontAttributes="Bold"
-                                       Grid.Column="3" 
-                                       Text="{Binding Status}" 
-                                       TextColor="Black"/>
+                                   VerticalTextAlignment="Center" 
+                                   FontAttributes="Bold"
+                                   Grid.Column="1" 
+                                   Text="{Binding Barcode}" 
+                                   TextColor="Black"/>
+                            <Button Grid.Column="2"
+                                    ImageSource="keyboard.png"
+                                    Clicked="OnManualClicked"
+                                    WidthRequest="65"
+                                    BackgroundColor="Black"/>
+                            <Button Grid.Column="3"
+                                    ImageSource="warning.png"
+                                    Clicked="OnProblemClicked"
+                                    WidthRequest="65"
+                                    BackgroundColor="Goldenrod"/>
+                            <Label HorizontalTextAlignment="Center" 
+                                   VerticalTextAlignment="Center" 
+                                   FontAttributes="Bold"
+                                   Grid.Column="4" 
+                                   Text="{Binding Status}" 
+                                   TextColor="Black"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>
