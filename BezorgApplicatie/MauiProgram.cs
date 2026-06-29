@@ -1,6 +1,5 @@
 ﻿using BezorgApplicatie.Data;
 using BezorgApplicatie.Models;
-using Java.Lang.Annotation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Handlers;

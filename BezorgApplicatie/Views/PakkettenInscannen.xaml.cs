@@ -30,6 +30,7 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
     private int _currentZoneIndex = 0;
     private string _currentZone = "D";
     private string _counterDisplay = "0/1";
+    private Button _nextBtn;
 
     public string CurrentZone
     {
@@ -167,9 +168,9 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
                 UpdateCounter();
                 if(CurrentZone == "A")
                 {
-                    NextBtn.Text = "Start Shift";
-                    NextBtn.BackgroundColor = Colors.Blue;
-                    NextBtn.TextColor = Colors.White;
+                    _nextBtn.Text = "Start Shift";
+                    _nextBtn.BackgroundColor = Colors.Blue;
+                    _nextBtn.TextColor = Colors.White;
                 }
 
                 await DisplayAlert("Zone", $"Volgende zone: {CurrentZone}", "OK");

@@ -111,15 +111,23 @@
                 Clicked="VorigeZone"/>
 
         <Button Grid.Row="7"
+                Grid.Column="2"
+                CornerRadius="20"
+                HeightRequest="50"
+                ImageSource="warning.png"
+                BackgroundColor="Goldenrod"
+                Clicked="ProbleemMelden"></Button>
+        <!--:Name="NextBtn"-->
+        <Button Grid.Row="7"
                 Grid.Column="3"
                 Grid.ColumnSpan="2"
-                x:Name="NextBtn"
                 Padding="5"
                 CornerRadius="25"
                 Text="Volgende Zone"
                 FontSize="15"
                 HeightRequest="50"
                 BackgroundColor="Green"
-                Clicked="VolgendeZone"/>
+                Clicked="VolgendeZone"
+                x:Name="NextBtn"/>
     </Grid>
 </ContentPage>
