@@ -192,6 +192,8 @@ public partial class DeliveryPage : ContentPage
         string result = await DisplayPromptAsync(
         "Handmatige invoer",
         $"Voer barcode in voor pakket {package.Number}:",
+        accept: "OK",
+        cancel: "Annuleren",
         initialValue: "",
         maxLength: 10,
         keyboard: Keyboard.Text);
