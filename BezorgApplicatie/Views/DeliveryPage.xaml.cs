@@ -14,10 +14,11 @@ public partial class DeliveryPage : ContentPage
 	private readonly DataContext _dataContext;
 	//public Shift Shift { get; set; }
 	public Order Order {  get; set; }
-	public ObservableCollection<Package> Packages { get; set; }
+    public Shift Shift { get; set; }
+    public ObservableCollection<Package> Packages { get; set; }
 
 
-    public DeliveryPage(DataContext dataContext, Order order)
+    public DeliveryPage(DataContext dataContext, Order order, Shift shift)
 	{
         InitializeComponent();
 		barcodeReader.Options = new BarcodeReaderOptions
@@ -28,7 +29,7 @@ public partial class DeliveryPage : ContentPage
             TryHarder = true
 		};
 		_dataContext = dataContext;
-        //Shift = new Shift();
+        Shift = shift;
         Order = order;
 
 		Packages = new ObservableCollection<Package>();
@@ -67,20 +68,20 @@ public partial class DeliveryPage : ContentPage
     //	}
     //}
 
-    private async Task LoadOrder()
-    {
-		//Placeholder -> Takes the first Order in the db.
-        try
-        {
-            await _dataContext.Database.EnsureCreatedAsync();
-            Order = await _dataContext.Orders.FirstAsync();
-			OnPropertyChanged(nameof(Order));
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Error", $"Er ging iets fout bij het laden van de order: {ex.Message}", "OK");
-        }
-    }
+  //  private async Task LoadOrder()
+  //  {
+		////Placeholder -> Takes the first Order in the db.
+  //      try
+  //      {
+  //          await _dataContext.Database.EnsureCreatedAsync();
+  //          Order = await _dataContext.Orders.FirstAsync();
+		//	OnPropertyChanged(nameof(Order));
+  //      }
+  //      catch (Exception ex)
+  //      {
+  //          await DisplayAlert("Error", $"Er ging iets fout bij het laden van de order: {ex.Message}", "OK");
+  //      }
+  //  }
 
     private async Task LoadPackages()
 	{ 
@@ -172,10 +173,14 @@ public partial class DeliveryPage : ContentPage
         if (current == total)
         {
             FeedbackLabel.TextColor = Colors.Green;
-            BezorgdBtn.IsEnabled = true;
-            BezorgdBtn.BackgroundColor = Colors.Blue; 
-            AndersPicker.IsEnabled = true;
-            AndersBorder.BackgroundColor = Colors.Orange;
+            DeliverdBtn.IsEnabled = true;
+            DeliverdBtn.BackgroundColor = Colors.Blue;
+            NeighbourBtn.IsEnabled = true;
+            NeighbourBtn.BackgroundColor = Colors.DarkBlue;
+            ParcelpointBtn.IsEnabled = true;
+            ParcelpointBtn.BackgroundColor = Colors.DarkBlue;
+            RefusedBtn.IsEnabled = true;
+            RefusedBtn.BackgroundColor = Colors.IndianRed;
         }
         FeedbackLabel.Text = $"{current}/{total}";
     }
@@ -211,45 +216,36 @@ public partial class DeliveryPage : ContentPage
             return;
             await Shell.Current.GoToAsync($"{nameof(ProblemPage)}?pakketId={package.Id}");
     }
-    private async void BezorgdBtn_Clicked(object sender, EventArgs e)
+    private async void DeliverdBtn_Clicked(object sender, EventArgs e)
     {
         Order.Status = "Bezorgd";
         await _dataContext.SaveChangesAsync();
         await Shell.Current.GoToAsync("..");
     }
-
-    private void OnAndersPickerChanged(object sender, EventArgs e)
+    private async void NeighbourBtn_Clicked(object sender, EventArgs e)
     {
-        var picker = sender as Picker;
-        var selectedItem = picker.SelectedItem?.ToString();
-
-        if (selectedItem == "Buren")
-        {
-            AndersPickerOption("Buren");
-        }
-        else if (selectedItem == "Pakketpunt")
-        {
-            AndersPickerOption("Pakketpunt");
-        }
-        else if (selectedItem == "Geweigerd")
-        {
-            AndersPickerOption("Geweigerd");
-        }
-        else if (selectedItem == "Anders")
-        {
-            AndersPickerOption("Anders");
-        }
+        string neighbour = await DisplayPromptAsync(
+            "Buren",
+            "Voer huisnummer van buren in:");
+        Order.Status = $"Bezorgd bij huisnummer: {neighbour}";
     }
-
-    private async void AndersPickerOption(string option)
+    private async void ParcelpointBtn_Clicked(object sender, EventArgs e)
     {
-        Order.Status = option;
+        Order.Status = "Bezorgd";
+        Order Pakketpunt = await _dataContext.Orders.Where(o => o.ShiftId == Shift.Id).LastAsync();
+
+        foreach (Package package in Packages)
+        {
+            package.OrderId = Pakketpunt.Id;
+        }
+
+        await _dataContext.SaveChangesAsync();
+        await Shell.Current.GoToAsync("..");
+    }
+    private async void RefusedBtn_Clicked(object sender, EventArgs e)
+    {
+        Order.Status = "Geweigerd";
         await _dataContext.SaveChangesAsync();
         await Shell.Current.GoToAsync("..");
     }
 }
-
-//TODO:
-//Handmatig invoeren
-//Bezorgd
-//Anders

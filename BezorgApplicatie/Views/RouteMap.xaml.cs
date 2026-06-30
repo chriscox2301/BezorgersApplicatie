@@ -55,6 +55,6 @@ public partial class RouteMap : ContentPage
 
     private async void DeliverButton_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new DeliveryPage(_dataContext, Order));
+        await Navigation.PushAsync(new DeliveryPage(_dataContext, Order, Shift));
     }
 }
