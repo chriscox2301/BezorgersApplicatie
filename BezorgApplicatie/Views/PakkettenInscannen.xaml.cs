@@ -168,9 +168,9 @@ public partial class PakkettenInscannen : ContentPage, INotifyPropertyChanged
                 UpdateCounter();
                 if(CurrentZone == "A")
                 {
-                    _nextBtn.Text = "Start Shift";
-                    _nextBtn.BackgroundColor = Colors.Blue;
-                    _nextBtn.TextColor = Colors.White;
+                    NextBtn.Text = "Start Shift";
+                    NextBtn.BackgroundColor = Colors.Blue;
+                    NextBtn.TextColor = Colors.White;
                 }
 
                 await DisplayAlert("Zone", $"Volgende zone: {CurrentZone}", "OK");
