@@ -5,16 +5,22 @@ class Order{
     +IEnumerable<Package> Packages
     +Status: string
     +Address: string
+    +Location: string
+    +ShiftId: int
+    +Shift: Shift
 }
 
 class Package{
     +Id: int
+    +Number: int
     +Weight: double
     +Barcode: string
+    +Status: string
     +Cart: Cart
     +CartId: int
     +Order: Order
     +OrderId: int
+    +HasIssue: bool
 }
 
 class VehicleDamage{
@@ -25,6 +31,9 @@ class VehicleDamage{
     +ShiftId: int
     +Vehicle: Vehicle
     +VehicleId: int
+    +Time: DateTime
+    +Latitude: double
+    +Longitude: double
 }
 
 class Shift{
@@ -44,6 +53,7 @@ class Shift{
 
 class PackageIssue{
     +Id: int
+    +IssueType: string
     +Description: string
     +Date: DateTime
     +Package: Package
@@ -66,8 +76,6 @@ class Load{
     +Id: int
     +Warehouse: Warehouse
     +WarehouseId: int
-    +Shift: Shift
-    +ShiftId: int
     +IEnumerable<Cart> Carts
 }
 
